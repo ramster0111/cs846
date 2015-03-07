@@ -2,7 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-function renderStatus(statusText) {
+function renderStatus(statusText) 
+{
   document.getElementById('status').textContent = statusText;
 }
 
@@ -13,16 +14,19 @@ function renderStatus(statusText) {
  * @param {function(string)} callback - called when the URL of the current tab
  *   is found.
  **/
-function getCurrentTabUrl(callback) {
+function getCurrentTabUrl(callback) 
+{
   // Query filter to be passed to chrome.tabs.query - see
   // https://developer.chrome.com/extensions/tabs#method-query
   renderStatus("Starting");
-  var queryInfo = {
+  var queryInfo = 
+  {
     active: true,
     currentWindow: true
   };
 
-  chrome.tabs.query(queryInfo, function(tabs) {
+  chrome.tabs.query(queryInfo, function(tabs) 
+  {
     // chrome.tabs.query invokes the callback with a list of tabs that match the
     // query. When the popup is opened, there is certainly a window and at least
     // one tab, so we can safely assume that |tabs| is a non-empty array.
@@ -61,7 +65,8 @@ function getCurrentTabUrl(callback) {
  * @param {function(string)} errorCallback - Called when the image is not found.
  *   The callback gets a string that describes the failure reason.
  */
-function getImageUrl(searchTerm, callback, errorCallback) {
+function getImageUrl(searchTerm, callback, errorCallback) 
+{
   // Google image search - 100 searches per day.
   // https://developers.google.com/image-search/
   var searchUrl = 'https://ajax.googleapis.com/ajax/services/search/images' +
@@ -70,7 +75,8 @@ function getImageUrl(searchTerm, callback, errorCallback) {
   x.open('GET', searchUrl);
   // The Google image search API responds with JSON, so let Chrome parse it.
   x.responseType = 'json';
-  x.onload = function() {
+  x.onload = function() 
+  {
     // Parse and process the response from Google Image Search.
     var response = x.response;
     if (!response || !response.responseData || !response.responseData.results ||
@@ -96,32 +102,44 @@ function getImageUrl(searchTerm, callback, errorCallback) {
 }
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    getCurrentTabUrl(function(url) {
-    // Put the image URL in Google search.
-    renderStatus('Performing Google Image search for ' + url);
+document.addEventListener('DOMContentLoaded', function() 
+{
+    getCurrentTabUrl(function(url) 
+    {
+      //var str = document.getElementsByClassName("commit-create").innerHTML;
+      //renderStatus(str);
+      renderStatus('HELLO WORLD');
+      /*
+      // Put the image URL in Google search.
+      renderStatus('...Performing Google Image search for ' + url);
 
-	
-    getImageUrl(url, function(imageUrl, width, height) {
+  	
+      getImageUrl(url, function(imageUrl, width, height) 
+      {
 
-      renderStatus('Search term: ' + url + '\n' +
-          'Google image search result: ' + imageUrl);
-		  
-	  var str = document.getElementsByClassName("entry-content").innerHTML;
-	  renderStatus(str + 'Hello World');
-	  
-      var imageResult = document.getElementById('image-result');
-      // Explicitly set the width/height to minimize the number of reflows. For
-      // a single image, this does not matter, but if you're going to embed
-      // multiple external images in your page, then the absence of width/height
-      // attributes causes the popup to resize multiple times.
-      imageResult.width = width;
-      imageResult.height = height;
-      imageResult.src = imageUrl;
-      imageResult.hidden = false;
+        renderStatus('...Search term: ' + url + '\n' + 'Google image search result: ' + imageUrl);
+  		  
+        
+    	  var str = document.getElementsByClassName("entry-content").innerHTML;
+    	  renderStatus(str + 'Hello World');
+    	  
+        var imageResult = document.getElementById('image-result');
+        // Explicitly set the width/height to minimize the number of reflows. For
+        // a single image, this does not matter, but if you're going to embed
+        // multiple external images in your page, then the absence of width/height
+        // attributes causes the popup to resize multiple times.
+        imageResult.width   = width;
+        imageResult.height  = height;
+        imageResult.src     = imageUrl;
+        imageResult.hidden  = false;
 
-    }, function(errorMessage) {
-      renderStatus('Cannot display image. ' + errorMessage);
+
+
+      }, function(errorMessage) {
+        
+        renderStatus('Cannot display image. ' + errorMessage);
+      
+      });
+      */
     });
-  });
 });
