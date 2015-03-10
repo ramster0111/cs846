@@ -25,12 +25,24 @@
   {
     "persistent": false,
     "scripts":    [ "background.js" ]
+    //"page": "background.html"
   },
 
   "content_scripts": [{
-        "matches": ["*://*.github.com/*"],
+        "matches": ["*://*.github.com/*/edit/*"],
         "js":      ["content.js"]
     }],
+
+  // put canvas here...
+  "web_accessible_resources": [
+    "images/*.png"  
+
+    //"style/double-rainbow.css",
+    //"script/double-rainbow.js",
+    //"script/main.js",
+    //"templates/*",
+    //"*.html"
+  ],
 
   "permissions": 
   [

@@ -1,4 +1,6 @@
 
+// background.js cannot interact with DOM, use content.js instead
+
 
 function doStuffWithDOM(element) 
 {
