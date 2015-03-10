@@ -7,7 +7,7 @@ function doStuffWithDOM(element)
 	if(element != null)
 	{
         // content of the source code here
-        alert(element);
+        //alert(element);
     }
 }
 
