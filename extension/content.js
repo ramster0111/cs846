@@ -1,12 +1,33 @@
 
 // content.js is the only script which can interact and manipulate with DOM
 
+function loadPage(href)
+{
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", href, false);
+    xmlhttp.send();
+    return xmlhttp.responseText;
+}
+
 // Listen for messages
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) 
 {
     // If the received message has the expected format...
     if (msg.text && (msg.text == "report_back")) 
     {
+    	var canvasPanelURL = chrome.extension.getURL("canvas.html");
+    	//var canvasPanel = loadPage(canvasPanelURL);
+    	//var canvasPanel = document.open("canvasPanelURL");
+
+    	//alert(canvasPanel.innerHTML);
+
+    	//jQuery("#dialog").load(canvasPanel).dialog({modal:true}); 
+
+    	//alert(canvasPanel);
+    	//document.body.appendChild(canvasPanel);
+    	//jQuery("#dialog").dialog();
+
+    	
     	var layerNode = document.createElement('div');
 		layerNode.setAttribute('id','dialog');
 		layerNode.setAttribute('title','Basic dialog');
@@ -17,6 +38,8 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse)
 		document.body.appendChild(layerNode);
 
 		jQuery("#dialog").dialog();
+		
+
 		/*
 		jQuery("#dialog").dialog({
 		autoOpen: true, 
