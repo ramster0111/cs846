@@ -15,11 +15,33 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse)
     // If the received message has the expected format...
     if (msg.text && (msg.text == "report_back")) 
     {
+    	/*
+    	//var canvasPanelURL = chrome.extension.getURL("canvas.html");
+    	var oFReader = new FileReader();
+        oFReader.readAsDataURL("canvas.html");
+        oFReader.onload = function (oFREvent) 
+        {
+        	console.log("content" + oFREvent.target.result);
+        };
+		*/
     	var canvasPanelURL = chrome.extension.getURL("canvas.html");
-    	//var canvasPanel = loadPage(canvasPanelURL);
-    	//var canvasPanel = document.open("canvasPanelURL");
+    	//var generatedSource = new XMLSerializer().serializeToString(canvasPanelURL);
+    	//console.log(generatedSource);
 
-    	//alert(canvasPanel.innerHTML);
+    	//var layerNode = document.createElement('div');
+		//layerNode.setAttribute('id','dialog');
+		//layerNode.setAttribute('title','Basic dialog');
+
+		//$("#dialog").load(canvasPanelURL);
+		//document.body.appendChild(layerNode);
+
+		//console.log("innerHTML" + layerNode.innerHTML);
+
+		//jQuery("#dialog").dialog();
+
+    	var canvasPanel = loadPage(canvasPanelURL);
+		console.log("duuude : " + canvasPanel);
+
 
     	//jQuery("#dialog").load(canvasPanel).dialog({modal:true}); 
 
@@ -27,7 +49,7 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse)
     	//document.body.appendChild(canvasPanel);
     	//jQuery("#dialog").dialog();
 
-    	
+    	/*
     	var layerNode = document.createElement('div');
 		layerNode.setAttribute('id','dialog');
 		layerNode.setAttribute('title','Basic dialog');
@@ -38,7 +60,7 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse)
 		document.body.appendChild(layerNode);
 
 		jQuery("#dialog").dialog();
-		
+		*/
 
 		/*
 		jQuery("#dialog").dialog({
