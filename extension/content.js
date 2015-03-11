@@ -1,7 +1,7 @@
 
 // content.js is the only script which can interact and manipulate with DOM
 
-function loadPage(href)
+function LoadPage(href)
 {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", href, false);
@@ -9,74 +9,20 @@ function loadPage(href)
     return xmlhttp.responseText;
 }
 
+function clickHandler(e) 
+{
+	//console.log("awesome!");
+}
+
+
 // Listen for messages
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) 
 {
     // If the received message has the expected format...
     if (msg.text && (msg.text == "report_back")) 
     {
-    	/*
     	//var canvasPanelURL = chrome.extension.getURL("canvas.html");
-    	var oFReader = new FileReader();
-        oFReader.readAsDataURL("canvas.html");
-        oFReader.onload = function (oFREvent) 
-        {
-        	console.log("content" + oFREvent.target.result);
-        };
-		*/
-    	var canvasPanelURL = chrome.extension.getURL("canvas.html");
-    	//var generatedSource = new XMLSerializer().serializeToString(canvasPanelURL);
-    	//console.log(generatedSource);
-
-    	//var layerNode = document.createElement('div');
-		//layerNode.setAttribute('id','dialog');
-		//layerNode.setAttribute('title','Basic dialog');
-
-		//$("#dialog").load(canvasPanelURL);
-		//document.body.appendChild(layerNode);
-
-		//console.log("innerHTML" + layerNode.innerHTML);
-
-		//jQuery("#dialog").dialog();
-
-    	var canvasPanel = loadPage(canvasPanelURL);
-		console.log("duuude : " + canvasPanel);
-
-
-    	//jQuery("#dialog").load(canvasPanel).dialog({modal:true}); 
-
-    	//alert(canvasPanel);
-    	//document.body.appendChild(canvasPanel);
-    	//jQuery("#dialog").dialog();
-
-    	/*
-    	var layerNode = document.createElement('div');
-		layerNode.setAttribute('id','dialog');
-		layerNode.setAttribute('title','Basic dialog');
-		var pNode = document.createElement('p');
-		console.log("pNode created"); 
-		pNode.innerHTML = "something nom nom nom";
-		layerNode.appendChild(pNode);
-		document.body.appendChild(layerNode);
-
-		jQuery("#dialog").dialog();
-		*/
-
-		/*
-		jQuery("#dialog").dialog({
-		autoOpen: true, 
-		draggable: true,
-		resizable: true,
-		height: 'auto',
-		width: 500,
-		zIndex:3999,
-		modal: false,
-		open: function(event, ui) {
-			$(event.target).parent().css('position','fixed');
-			$(event.target).parent().css('top', '5px');
-			$(event.target).parent().css('left', '10px');
-  		}});
-		*/
+    	//var canvasPanel = LoadPage(canvasPanelURL);
 
     	var faElements = document.getElementsByClassName("file-actions");
     	var faDiv = faElements[0];
@@ -84,7 +30,15 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse)
     	var buttonElem = document.getElementById("insert_diagram_button");
     	if(buttonElem == null)
     	{
-    		faDiv.innerHTML += "<a id='insert_diagram_button' href='#'>Insert a diagram</a>";
+    		faDiv.innerHTML += "<a id='insert_diagram_button' href='#' >Diagram</a>";
+
+    		/*
+			document.addEventListener('DOMContentLoaded', function () 
+			{
+				document.querySelector('#insert_diagram_button').addEventListener('click', clickHandler);
+				main();
+			});
+			*/
     	}
 
 
