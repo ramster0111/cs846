@@ -27,14 +27,14 @@ chrome.tabs.onUpdated.addListener(function(tabID, changeInfo, tab)
 
 
 chrome.browserAction.onClicked.addListener(function() {
-    var w = 600;
-    var h = 300;
+    var w = 500;
+    var h = 250;
 	
 	// To draw in the middle
-    var left = (screen.width / 2) - ( w / 2);
-    var top = (screen.height / 2) - (h / 2); 
+    var left = (screen.width / 2) - ( w / 4);
+    var top = (screen.height / 2) - (h / 4); 
 
-    chrome.windows.create({'url': 'canvas.html', 'type': 'popup', 'width': w, 'height': h, 'left': left, 'top': top} , function(window) {
+    chrome.windows.create({'url': 'canvas.html', 'type': 'popup', 'left': left, 'top': top, 'width': w, 'height': h,} , function(window) {
     });
 });
 
