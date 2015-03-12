@@ -27,8 +27,8 @@ chrome.tabs.onUpdated.addListener(function(tabID, changeInfo, tab)
 
 
 chrome.browserAction.onClicked.addListener(function() {
-    var w = 500;
-    var h = 250;
+    var w = 600;
+    var h = 300;
 	
 	// To draw in the middle
     var left = (screen.width / 2) - ( w / 4);

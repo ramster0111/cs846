@@ -1,5 +1,6 @@
  function drawCanvas(){
 	var canvas = document.getElementById('Canvas');
+	
 	if (canvas.getContext) {
 		var ctx = canvas.getContext('2d');
 /*
@@ -41,9 +42,8 @@
 	
 		ctx.beginPath();
 		ctx.moveTo(0, 31);
-		ctx.lineTo(500, 31);
+		ctx.lineTo(600, 31);
 		ctx.stroke();
-		
 	}
 
  }
