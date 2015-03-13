@@ -17,7 +17,7 @@
   "browser_action": 
   {
     "default_icon": "icon.png"
-   // "default_popup": "popup.html"
+    //"default_popup": "popup.html"
   },
 
   // listener.js is used to detect when a user is editing a file on github
@@ -35,12 +35,11 @@
     }],
 
   "web_accessible_resources": [
-     "images/*.png",  // jquery css resources
+     "images/*",
      "*.html"
 
     //"style/double-rainbow.css",
     //"script/double-rainbow.js",
-    //"script/main.js",
     //"templates/*",
     //"*.html"
   ],

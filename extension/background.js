@@ -26,7 +26,8 @@ chrome.tabs.onUpdated.addListener(function(tabID, changeInfo, tab)
 });
 
 
-chrome.browserAction.onClicked.addListener(function() {
+chrome.browserAction.onClicked.addListener(function() 
+{
     var w = 600;
     var h = 300;
 	
@@ -34,7 +35,13 @@ chrome.browserAction.onClicked.addListener(function() {
     var left = (screen.width / 2) - ( w / 4);
     var top = (screen.height / 2) - (h / 4); 
 
-    chrome.windows.create( {'url': 'canvas.html', 'type': 'popup', 'left': left, 'top': top, 'width': w, 'height': h} , function(window) {
-    });
+    chrome.windows.create({
+    	'url': 'canvas.html', 
+    	'type': 'popup', 
+    	'left': left, 
+    	'top': top, 
+    	'width': w, 
+    	'height': h}, 
+    	function(window) { });
 });
 
