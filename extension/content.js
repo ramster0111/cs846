@@ -22,21 +22,16 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse)
 
     	//var faElements = document.getElementsByClassName("file-actions");
     	//var faDiv = faElements[0];
-
     	//var buttonElem = document.getElementById("insert_diagram_button");
     	//if(buttonElem == null)
     	//{
     	//	faDiv.innerHTML += "<a id='insert_diagram_button' href='#' >Diagram</a>";
-    		/*
-			document.addEventListener('DOMContentLoaded', function () 
+			/*document.addEventListener('DOMContentLoaded', function () 
 			{
 				document.querySelector('#insert_diagram_button').addEventListener('click', clickHandler);
 				main();
-			});
-			*/
+			});*/
     	//}
-
-
 
     	// send a response to background.js (is this appropriate?)
     	// http://stackoverflow.com/questions/19758028/chrome-extension-get-dom-content

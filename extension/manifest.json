@@ -30,8 +30,9 @@
 
   "content_scripts": [{
         "matches": ["*://*.github.com/*/edit/*"],
-        "js":      ["content.js", "jquery.js", "jquery-ui.js"],
-        "css":     [ "jquery-ui.css"]
+        "js":      ["content.js"]
+        //"js":      ["content.js", "jquery.js", "jquery-ui.js"],
+        //"css":     [ "jquery-ui.css"]
     }],
 
   "web_accessible_resources": [
