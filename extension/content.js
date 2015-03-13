@@ -1,17 +1,13 @@
 
 // content.js is the only script which can interact and manipulate with DOM
 
+
 function LoadPage(href)
 {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", href, false);
     xmlhttp.send();
     return xmlhttp.responseText;
-}
-
-function clickHandler(e) 
-{
-	//console.log("awesome!");
 }
 
 
@@ -24,14 +20,13 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse)
     	//var canvasPanelURL = chrome.extension.getURL("canvas.html");
     	//var canvasPanel = LoadPage(canvasPanelURL);
 
-    	var faElements = document.getElementsByClassName("file-actions");
-    	var faDiv = faElements[0];
+    	//var faElements = document.getElementsByClassName("file-actions");
+    	//var faDiv = faElements[0];
 
-    	var buttonElem = document.getElementById("insert_diagram_button");
-    	if(buttonElem == null)
-    	{
-    		faDiv.innerHTML += "<a id='insert_diagram_button' href='#' >Diagram</a>";
-
+    	//var buttonElem = document.getElementById("insert_diagram_button");
+    	//if(buttonElem == null)
+    	//{
+    	//	faDiv.innerHTML += "<a id='insert_diagram_button' href='#' >Diagram</a>";
     		/*
 			document.addEventListener('DOMContentLoaded', function () 
 			{
@@ -39,7 +34,7 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse)
 				main();
 			});
 			*/
-    	}
+    	//}
 
 
 

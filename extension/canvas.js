@@ -181,7 +181,8 @@ var drawingCanvas = (function () {
 		ctx.clearRect(0, 31, canvas.width, canvas.height);
 	}
 
-	function drawCanvas(){
+	function drawCanvas()
+	{
 			canvaso = document.getElementById('Canvas');
 		
 			if (canvaso.getContext) {
