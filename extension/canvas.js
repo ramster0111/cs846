@@ -9,11 +9,11 @@ var drawingCanvas = (function () {
 		drawingtool,
 		drawingtools = {},
 		tool_selected = 'rect',
-		tool_default = 'line',
+		tool_default = 'text',
 		canvaso,
 		ctxo;
 		
-		drawingtools.line = function () {
+	drawingtools.line = function () {
 			var tool = this;
 			this.started = false;
 
@@ -43,9 +43,56 @@ var drawingCanvas = (function () {
 					img_update();
 				}
 			};
-		};
+	};
+
+	drawingtools.arrowline = function () {
+			var tool = this;
+			this.started = false;
+
+			this.mousedown = function (ev) {
+				tool.started = true;
+				tool.x0 = ev._x;
+				tool.y0 = ev._y;
+			};
+
+			this.mousemove = function (ev) {
+				if (!tool.started) {
+					return;
+				}
 		
-		drawingtools.rect = function () {
+				ctx.clearRect(0, 31, canvas.width, canvas.height);
+				ctx.beginPath();
+				ctx.moveTo(tool.x0, tool.y0);
+				ctx.lineTo(ev._x, ev._y);
+				ctx.stroke();
+				ctx.closePath();
+				
+				var endRadians = Math.atan((ev._y - tool.y0)/(ev._x - tool.x0));
+				endRadians += ((ev._x >= tool.x0) ? 90 : -90 ) * Math.PI / 180;
+
+				ctx.save();
+				ctx.beginPath();
+				ctx.translate(ev._x,ev._y);
+				ctx.rotate(endRadians);
+				ctx.moveTo(0,0);
+				ctx.lineTo(5,20);
+				ctx.lineTo(-5,20);
+				ctx.closePath();
+				ctx.restore();
+				ctx.fill();		
+
+			};
+
+			this.mouseup = function (ev) {
+				if (tool.started) {
+					tool.mousemove(ev);
+					tool.started = false;
+					img_update();
+				}
+			};
+	};		
+		
+	drawingtools.rect = function () {
 			var tool = this;
 			this.started = false;
 
@@ -81,7 +128,39 @@ var drawingCanvas = (function () {
 					img_update();
 				}
 			};
-		};
+	};
+
+	drawingtools.text = function () {
+			var tool = this;
+			this.started = false;
+			var inputstring = "Raminder",
+				textwidth = 20,
+				textheight = 20;
+				
+			this.mousedown = function (ev) {
+				if (!tool.started) {
+					return;
+				}				
+
+				tool.x0 = ev._x;
+				tool.y0 = ev._y;
+			};
+
+			this.mousemove = function (ev) {
+				tool.started = true;
+				ctx.clearRect(0, 31, canvas.width, canvas.height);
+				ctx.font = 'italic 20px sans-serif';
+				ctx.fillText(inputstring,ev._x,ev._y);
+			};
+
+			this.mouseup = function (ev) {
+				if (tool.started) {
+					tool.mousemove(ev);
+					tool.started = false;
+					img_update();
+				}
+			};
+	};
 
 	
 	function mouseEvent(ev){
@@ -174,7 +253,10 @@ var drawingCanvas = (function () {
 			canvas.addEventListener("mouseout", mouseEvent, false);
 
 	}
- 
+
+
+
+	
 	return {
 		drawCanvas: drawCanvas
 	};
