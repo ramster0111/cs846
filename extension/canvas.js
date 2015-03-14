@@ -9,8 +9,11 @@ var drawingCanvas = (function () {
 		drawingtool,
 		drawingtools = {},
 		tool_selected = 'rect',
-		tool_default = 'text',
+		tool_default = 'line',
 		canvaso,
+		rectangles = [],
+		lines = [],
+		arrowlines = [],
 		ctxo;
 		
 	drawingtools.line = function () {
@@ -39,6 +42,12 @@ var drawingCanvas = (function () {
 			this.mouseup = function (ev) {
 				if (tool.started) {
 					tool.mousemove(ev);
+					var storelineobject = {};
+					storelineobject.x0 = tool.x0;
+					storelineobject.y0 = tool.y0;
+					storelineobject.x1 = ev._x;
+					storelineobject.y1 = ev._y;
+					lines.push(storelineobject);
 					tool.started = false;
 					img_update();
 				}
@@ -48,6 +57,8 @@ var drawingCanvas = (function () {
 	drawingtools.arrowline = function () {
 			var tool = this;
 			this.started = false;
+			var x,
+				y;
 
 			this.mousedown = function (ev) {
 				tool.started = true;
@@ -80,12 +91,19 @@ var drawingCanvas = (function () {
 				ctx.closePath();
 				ctx.restore();
 				ctx.fill();		
-
 			};
 
 			this.mouseup = function (ev) {
 				if (tool.started) {
 					tool.mousemove(ev);
+					var storearrowlineobject = {};
+					storearrowlineobject.x0 = tool.x0;
+					storearrowlineobject.y0 = tool.y0;
+					storearrowlineobject.x1 = ev._x;
+					storearrowlineobject.y1 = ev._y;
+					storearrowlineobject.xdiff = 5;
+					storearrowlineobject.ydiff = 20;
+					lines.push(storearrowlineobject);
 					tool.started = false;
 					img_update();
 				}
@@ -95,7 +113,10 @@ var drawingCanvas = (function () {
 	drawingtools.rect = function () {
 			var tool = this;
 			this.started = false;
-
+			var x,
+				y,
+				w,
+				h;
 			this.mousedown = function (ev) {
 				tool.started = true;
 				tool.x0 = ev._x;
@@ -107,9 +128,9 @@ var drawingCanvas = (function () {
 					return;
 				}
 
-				var x = Math.min(ev._x,	tool.x0),
-				y = Math.min(ev._y,	tool.y0),
-				w = Math.abs(ev._x - tool.x0),
+				x = Math.min(ev._x,	tool.x0);
+				y = Math.min(ev._y,	tool.y0);
+				w = Math.abs(ev._x - tool.x0);
 				h = Math.abs(ev._y - tool.y0);
 
 				ctx.clearRect(0, 31, canvas.width, canvas.height);
@@ -117,13 +138,18 @@ var drawingCanvas = (function () {
 				if (!w || !h) {
 					return;
 				}
-
 				ctx.strokeRect(x, y, w, h);
 			};
 
 			this.mouseup = function (ev) {
 				if (tool.started) {
 					tool.mousemove(ev);
+					var storerectobject = {};
+					storerectobject.x = x;
+					storerectobject.y = y;
+					storerectobject.w = w;
+					storerectobject.h = h;
+					rectangles.push(storerectobject);
 					tool.started = false;
 					img_update();
 				}
@@ -141,7 +167,6 @@ var drawingCanvas = (function () {
 				if (!tool.started) {
 					return;
 				}				
-
 				tool.x0 = ev._x;
 				tool.y0 = ev._y;
 			};
