@@ -1,3 +1,39 @@
+
+// function InsertDiagram()
+// {
+// 	console.log("insert diagram 2");
+// }
+
+
+// $(function()
+// {
+//     console.log("insert diagram 1");
+//     $('#insertdiagram').click(function(){InsertDiagram();});
+// });
+
+function InsertDiagram(e) 
+{
+    chrome.extension.sendMessage({directive: "insertdiagram"}, function(response) 
+    {
+        this.close();
+    });
+}
+
+function CancelDiagram(e) 
+{
+    chrome.extension.sendMessage({directive: "insertdiagram"}, function(response) 
+    {
+        this.close();
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () 
+{
+    document.getElementById('insertdiagram').addEventListener('click', InsertDiagram);
+    document.getElementById('canceldiagram').addEventListener('click', CancelDiagram);
+})
+
+
 var drawingCanvas = (function () {
 
 	"use strict";
