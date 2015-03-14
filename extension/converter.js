@@ -23,12 +23,20 @@ var lTriangle = "◀";
 var tTriangle = "▲";
 var bTriangle = "▼";
 
-
 var slash = "╱";
 var backslash = "╲";
 var cross = "╳";
 
+// not done yet
+// textInput: 	input text which contains unicode art
 function ParseTextToVector(textInput)
 {
-	alert(textInput);
+	var width = 60;
+	var height = 30
+}
+
+// not done yet
+function ParseVectorToText()
+{
+
 }
