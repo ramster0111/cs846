@@ -1,17 +1,46 @@
+
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>HTML5 Drawing Canvas</title>
-  </head>
-  <body>
-	<canvas id="Canvas" width="600" height="300">
+	<head>
+	<title>HTML5 Drawing Canvas</title>
 	<style>
-	#container { position: relative; }
-	#imageView { border: 0px solid #000; }
-	#Canvas { position: absolute; top: 0px; left: 0px; }
-	#imageTemp { position: absolute; top: 0px; left: 0px; }
-	</style>
-    <script type="text/javascript" src="canvas.js"></script>
+		body 
+		{
+			max-width: 600px;
+			min-width: 600px;
+			max-height: 315px;
+			min-height: 315px;
+		}
 
-   </body>
+	    .expandedRow
+	    {
+	         height:300px;
+	    }
+	</style>
+	</head>
+	<body>
+		<table style="width:100%">
+			<tr>
+				<td class="expandedRow">
+					<canvas id="Canvas" width="600" height="300">
+						<style>
+							#container { position: relative; }
+							#imageView { border: 0px solid #000; }
+							#Canvas { position: absolute; top: 0px; left: 0px; }
+							#imageTemp { position: absolute; top: 0px; left: 0px; }
+							
+						</style>
+					    <script type="text/javascript" src="canvas.js"></script>
+				    </canvas>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button type="button">Insert</button>
+    				<button type="button">Cancel</button>
+				</td>
+			</tr>
+		</table>    
+	</body>
 </html>
