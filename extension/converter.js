@@ -26,4 +26,9 @@ var bTriangle = "▼";
 
 var slash = "╱";
 var backslash = "╲";
-var cross = "╳";"
+var cross = "╳";
+
+function ParseTextToVector(textInput)
+{
+	alert(textInput);
+}

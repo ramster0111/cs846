@@ -14,6 +14,8 @@ function LoadPage(href)
 // Listen for messages
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) 
 {
+    ParseTextToVector("hello dude");
+
     // If the received message has the expected format...
     if (msg.text && (msg.text == "report_back")) 
     {
