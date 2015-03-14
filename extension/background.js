@@ -11,6 +11,19 @@
 //    }
 //}
 
+chrome.extension.onMessage.addListener(function(request, sender, sendResponse) 
+{
+    switch (request.directive) 
+    {
+    case "insertdiagram":
+        sendResponse({});
+        break;
+    case "canceldiagram":
+        sendResponse({});
+        break;
+    }
+});
+
 chrome.tabs.onUpdated.addListener(function(tabID, changeInfo, tab)
 {
     var splitString = tab.url.split( '/' );

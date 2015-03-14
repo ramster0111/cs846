@@ -11,6 +11,8 @@
 //     $('#insertdiagram').click(function(){InsertDiagram();});
 // });
 
+
+
 function InsertDiagram(e) 
 {
     chrome.extension.sendMessage({directive: "insertdiagram"}, function(response) 
@@ -33,10 +35,7 @@ document.addEventListener('DOMContentLoaded', function ()
     document.getElementById('canceldiagram').addEventListener('click', CancelDiagram);
 })
 
-
-var drawingCanvas = (function () {
-
-	"use strict";
+"use strict";
 	var canvas,
 		ctx,
 		mouse_x_coor,
@@ -51,7 +50,9 @@ var drawingCanvas = (function () {
 		lines = [],
 		arrowlines = [],
 		ctxo;
-		
+
+var drawingCanvas = (function () {
+
 	drawingtools.line = function () {
 			var tool = this;
 			this.started = false;
