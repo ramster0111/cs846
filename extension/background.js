@@ -6,9 +6,17 @@
 //{
 //	if(element != null)
 //	{
-//        // content of the source code here
-//        //alert(element);
-//    }
+//      // content of the source code here
+//      //alert(element);
+//  }
+//}
+
+var currentTabID;
+
+//function InsertDiagramToTextArea(element) 
+//{
+    //alert(element);
+    //alert("insert_text 2");
 //}
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) 
@@ -16,9 +24,14 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse)
     switch (request.directive) 
     {
     case "insertdiagram":
+
+        chrome.tabs.sendMessage(currentTabID, { text: "insert_text", data: request.data}, function(response) {
+            console.log(response.farewell);
+        });
         sendResponse({});
         break;
     case "canceldiagram":
+        // do nothing
         sendResponse({});
         break;
     }
@@ -31,6 +44,7 @@ chrome.tabs.onUpdated.addListener(function(tabID, changeInfo, tab)
 	{
 		// retrieving dom
 		//chrome.tabs.sendMessage(tab.id, { text: "report_back" }, doStuffWithDOM);
+        currentTabID = tabID;
         chrome.browserAction.enable(tabID);
         chrome.browserAction.setIcon({path: "images/icon16.png"});
 	}

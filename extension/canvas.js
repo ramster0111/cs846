@@ -13,9 +13,12 @@
 
 
 
+var cars = ["Saab", "Volvo", "BMW"];
+
+
 function InsertDiagram(e) 
 {
-    chrome.extension.sendMessage({directive: "insertdiagram"}, function(response) 
+    chrome.runtime.sendMessage({directive: "insertdiagram", data: cars}, function(response) 
     {
         this.close();
     });
@@ -23,7 +26,7 @@ function InsertDiagram(e)
 
 function CancelDiagram(e) 
 {
-    chrome.extension.sendMessage({directive: "insertdiagram"}, function(response) 
+    chrome.runtime.sendMessage({directive: "canceldiagram"}, function(response) 
     {
         this.close();
     });
