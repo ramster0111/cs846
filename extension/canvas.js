@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function ()
 		drawingtool,
 		drawingtools = {},
 		tool_selected = 'rect',
-		tool_default = 'arrowline',
+		tool_default = 'rect',
 		canvaso,
 		rectangles = [],
 		lines = [],
@@ -70,7 +70,7 @@ var drawingCanvas = (function () {
 			};
 
 			this.mousemove = function (ev) {
-				if (!tool.started) {
+				if (!tool.started || ev._y < 30 || ev._y > 300) {
 					return;
 				}
 		
@@ -157,7 +157,7 @@ var drawingCanvas = (function () {
 			};
 
 			this.mousemove = function (ev) {
-				if (!tool.started) {
+				if (!tool.started || ev._y < 30 || ev._y > 300) {
 					return;
 				}
 		
@@ -286,7 +286,7 @@ var drawingCanvas = (function () {
 			};
 
 			this.mousemove = function (ev) {
-				if (!tool.started) {
+				if (!tool.started || ev._y < 31 || ev._y > 300) {
 					return;
 				}
 
@@ -362,13 +362,50 @@ var drawingCanvas = (function () {
 			ev._x = ev.layerX;
 			ev._y = ev.layerY;
 		} 
-		
 		var func = drawingtool[ev.type];
 			if (func) {
 				func(ev);
-			}
+		}
+		
 	}
 
+	function mouseDownEvent(ev){
+
+		if (ev.layerX || ev.layerX == 0) { // Firefox
+			ev._x = ev.layerX;
+			ev._y = ev.layerY;
+		} 
+		
+		if (ev._y < 30 ){
+				if (ev._x < 30){
+					 tool_selected = 'rect';
+				}
+				else if(ev._x < 60){
+					 tool_selected = 'line';
+				}
+				else if(ev._x < 90){
+					 tool_selected = 'arrowline';
+				}
+				else if(ev._x < 120){
+					 tool_selected = 'text';
+				}
+				
+				if (drawingtools[tool_selected]) {
+						drawingtool = new drawingtools[tool_selected]();
+						drawingtool.value = tool_selected;
+				}
+
+		}
+		else{
+			
+			var func = drawingtool[ev.type];
+				if (func) {
+					func(ev);
+			}
+		}
+		
+	}
+	
 	function img_update () {
 	
 	/*
@@ -482,12 +519,12 @@ var drawingCanvas = (function () {
 			}
 	
 
-		    if (drawingtools[tool_default]) {
-				drawingtool = new drawingtools[tool_default]();
-				drawingtool.value = tool_default;
+		    if (drawingtools[tool_selected]) {
+				drawingtool = new drawingtools[tool_selected]();
+				drawingtool.value = tool_selected;
 			}
 			
-			canvas.addEventListener("mousedown", mouseEvent, true);
+			canvas.addEventListener("mousedown", mouseDownEvent, true);
 			canvas.addEventListener("mousemove", mouseEvent, false);
 			canvas.addEventListener("mouseup", mouseEvent);
 			canvas.addEventListener("mouseout", mouseEvent, false);
