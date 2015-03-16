@@ -39,7 +39,7 @@
   "content_scripts": 
   [{
     "matches": ["*://*.github.com/*/edit/*"],
-    "js":      ["converter.js", "content.js"]
+    "js":      ["ace.js", "jquery.js", "converter.js", "content.js"]
     //"js":      ["content.js", "jquery.js", "jquery-ui.js"],
     //"css":     [ "jquery-ui.css"]
   }],

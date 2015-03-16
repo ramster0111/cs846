@@ -2,14 +2,23 @@
 // content.js is the only script which can interact and manipulate with DOM
 
 
-// function LoadPage(href)
-// {
-//     var xmlhttp = new XMLHttpRequest();
-//     xmlhttp.open("GET", href, false);
-//     xmlhttp.send();
-//     return xmlhttp.responseText;
-// }
 
+
+document.onmousedown = mouseDown;
+
+function mouseDown(e)
+{
+}
+
+function InsertToAceEditor(message)
+{
+    var scriptContent = "document.querySelector('.ace_editor').env.editor.insert('" +  message+ " ')";
+    var script = document.createElement('script');
+    script.id = 'tmpScript';
+    script.appendChild(document.createTextNode(scriptContent));
+    document.body.appendChild(script);
+    $("#tmpScript").remove();
+}
 
 
 // Listen for messages
@@ -17,20 +26,31 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse)
 {
     if(msg.text && (msg.text == "insert_text")) 
     {
-        var dataString = "";
-        for (i = 0; i < msg.data.length; i++)
-        {
-            dataString += msg.data[i] + " - ";
-        }
-        //alert("content.js" + dataString);
 
-        $("#blob_contents").caret();
-        alert("content.js" + dataString);
+        InsertToAceEditor("HELLO WORLD");
+
+        // var dataString = "";
+        // for (i = 0; i < msg.data.length; i++)
+        // {
+        //     dataString += msg.data[i] + " - ";
+        // }
+        // alert("content.js" + dataString);
+
+        // if (document.selection) 
+        // {
+        //     alert("document selection");
+        // }
         
+        
+
         //alert(msg.data);
         //alert("insert_text 2");
         //sendResponse(document.getElementById("blob_contents").value);
     }
+    // else if(msg.text && (msg.text == "clicked"))
+    // {
+    //     alert("click'");
+    // }
 
     //ParseTextToVector("hello dude");
 

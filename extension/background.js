@@ -19,6 +19,8 @@ var currentTabID;
     //alert("insert_text 2");
 //}
 
+
+
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) 
 {
     switch (request.directive) 
@@ -56,9 +58,19 @@ chrome.tabs.onUpdated.addListener(function(tabID, changeInfo, tab)
     }
 });
 
+// chrome.browserAction.onClicked.addListener(function (tab) {
+//     alert("icon clicked");
+// });
+
 
 chrome.browserAction.onClicked.addListener(function() 
 {
+    
+
+    // chrome.tabs.sendMessage(currentTabID, { text: "clicked"}, function(response) {
+    //         console.log(response.farewell);
+    //     });
+
     var w = 600;
     var h = 300;
 	
