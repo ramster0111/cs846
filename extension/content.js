@@ -26,23 +26,9 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse)
 {
     if(msg.text && (msg.text == "insert_text")) 
     {
-
-        InsertToAceEditor("HELLO WORLD");
-
-        // var dataString = "";
-        // for (i = 0; i < msg.data.length; i++)
-        // {
-        //     dataString += msg.data[i] + " - ";
-        // }
-        // alert("content.js" + dataString);
-
-        // if (document.selection) 
-        // {
-        //     alert("document selection");
-        // }
-        
-        
-
+        //InsertToAceEditor("HELLO WORLD");
+        //alert(msg.data.rectangles.length + " - " + msg.data.lines.length + " - " + msg.data.arrowlines.length);
+     
         //alert(msg.data);
         //alert("insert_text 2");
         //sendResponse(document.getElementById("blob_contents").value);

@@ -11,14 +11,33 @@
 //     $('#insertdiagram').click(function(){InsertDiagram();});
 // });
 
-
-
-var cars = ["Saab", "Volvo", "BMW"];
-
+"use strict";
+	var canvas,
+		ctx,
+		mouse_x_coor,
+		mouse_y_coor,
+		started = false,
+		drawingtool,
+		drawingtools = {},
+		tool_selected = 'rect',
+		tool_default = 'rect',
+		canvaso,
+		rectangles = [],
+		lines = [],
+		arrowlines = [],
+		ctxo;
 
 function InsertDiagram(e) 
 {
-    chrome.runtime.sendMessage({directive: "insertdiagram", data: cars}, function(response) 
+	// prepare data
+	var transferData = {};
+	transferData.rectangles = rectangles;
+	transferData.lines = lines;
+	transferData.arrowlines = arrowlines;
+
+	// send data
+    chrome.runtime.sendMessage({directive: "insertdiagram", data: transferData}, function(response)
+    //chrome.runtime.sendMessage({directive: "insertdiagram", data: "stuff"}, function(response)  
     {
         this.close();
     });
@@ -38,21 +57,7 @@ document.addEventListener('DOMContentLoaded', function ()
     document.getElementById('canceldiagram').addEventListener('click', CancelDiagram);
 })
 
-"use strict";
-	var canvas,
-		ctx,
-		mouse_x_coor,
-		mouse_y_coor,
-		started = false,
-		drawingtool,
-		drawingtools = {},
-		tool_selected = 'rect',
-		tool_default = 'rect',
-		canvaso,
-		rectangles = [],
-		lines = [],
-		arrowlines = [],
-		ctxo;
+
 
 var drawingCanvas = (function () {
 

@@ -29,10 +29,10 @@ var cross = "╳";
 
 // not done yet
 // textInput: 	input text which contains unicode art
-function ParseTextToVector(textInput)
+function ParseTextToVector(dataInput)
 {
-	var width = 60;
-	var height = 30
+	//var width = 60;
+	//var height = 30
 }
 
 // not done yet
