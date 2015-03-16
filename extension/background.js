@@ -2,31 +2,13 @@
 // background.js cannot interact with DOM, use content.js instead
 
 
-//function doStuffWithDOM(element) 
-//{
-//	if(element != null)
-//	{
-//      // content of the source code here
-//      //alert(element);
-//  }
-//}
-
 var currentTabID;
-
-//function InsertDiagramToTextArea(element) 
-//{
-    //alert(element);
-    //alert("insert_text 2");
-//}
-
-
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) 
 {
     switch (request.directive) 
     {
     case "insertdiagram":
-
         chrome.tabs.sendMessage(currentTabID, { text: "insert_text", data: request.data}, function(response) {
             console.log(response.farewell);
         });
@@ -64,13 +46,12 @@ chrome.tabs.onUpdated.addListener(function(tabID, changeInfo, tab)
 
 
 chrome.browserAction.onClicked.addListener(function() 
-{
-    
-
+{  
     // chrome.tabs.sendMessage(currentTabID, { text: "clicked"}, function(response) {
     //         console.log(response.farewell);
     //     });
 
+    /*
     var w = 600;
     var h = 300;
 	
@@ -86,5 +67,6 @@ chrome.browserAction.onClicked.addListener(function()
     	'width': w, 
     	'height': h}, 
     	function(window) { });
+    */
 });
 

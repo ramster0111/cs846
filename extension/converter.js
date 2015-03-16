@@ -1,6 +1,17 @@
 
 // list of characters
 
+// var vLine = "│";
+// var hLine = "─";
+// var tlCorner = "┌";
+// var trCorner = "┐";
+// var blCorner = "└";
+// var brCorner = "┘";
+// var rFork = "┣";
+// var lFork = "┫";
+// var bFork = "┳";
+// var tFork = "┻";
+
 var vLine = "┃";
 var hLine = "━";
 

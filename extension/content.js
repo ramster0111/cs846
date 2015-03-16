@@ -6,23 +6,25 @@
 
 document.onmousedown = mouseDown;
 
+/*
+var script0 = document.createElement('link');
+script0.rel = "stylesheet";
+script0.type = "text/css";
+script0.href = "https://fonts.googleapis.com/css?family=Droid+Sans+Mono"
+document.head.appendChild(script0);
+*/
+
+var scriptContent1 = "document.querySelector('.ace_editor').env.editor.setOptions({ fontFamily: 'Droid Sans Mono', fontSize: '10pt' });";
+var script1 = document.createElement('script');
+script1.id = 'tmpScriptInit';
+script1.appendChild(document.createTextNode(scriptContent1));
+document.body.appendChild(script1);
+
 function mouseDown(e)
 {
 }
 
-// function AddASpace()
-// {
-//     var scriptContent = "document.querySelector('.ace_editor').env.editor.insert(' ')";
-//     var script = document.createElement('script');
-//     script.id = 'tmpScript';
-//     script.appendChild(document.createTextNode(scriptContent));
-//     document.body.appendChild(script);
-//     $("#tmpScript").remove();
-// }
-
-
-
-function NavigateLeft()
+/*function NavigateLeft()
 {
     var scriptContent = "document.querySelector('.ace_editor').env.editor.navigateLeft(1);";
     var script = document.createElement('script');
@@ -30,9 +32,9 @@ function NavigateLeft()
     script.appendChild(document.createTextNode(scriptContent));
     document.body.appendChild(script);
     $("#tmpScript").remove();
-}
+}*/
 
-function NavigateRight()
+/*function NavigateRight()
 {
     var scriptContent = "document.querySelector('.ace_editor').env.editor.navigateRight(1);";
     var script = document.createElement('script');
@@ -40,7 +42,7 @@ function NavigateRight()
     script.appendChild(document.createTextNode(scriptContent));
     document.body.appendChild(script);
     $("#tmpScript").remove();
-}
+}*/
 
 function InsertANewline()
 {
@@ -68,30 +70,8 @@ function InsertToAceEditor(message)
     script.id = 'tmpScript';
     script.appendChild(document.createTextNode(scriptContent));
     document.body.appendChild(script);
-    //$("#tmpScript").remove();
+    $("#tmpScript").remove();
 }
-
-// function InsertToAceEditorWithSpaces(message)
-// {
-//     AddASpace();
-//     AddASpace();
-//     NavigateLeft();
-//     InsertToAceEditor(message);
-
-// }
-
-
-
-// function ReplaceAllInEditor(replacement, charStr)
-// {
-//     var scriptContent = "document.querySelector('.ace_editor').env.editor.replaceAll('" + replacement +"', '" + charStr + "')";
-//     var script = document.createElement('script');
-//     script.id = 'tmpScript';
-//     script.appendChild(document.createTextNode(scriptContent));
-//     document.body.appendChild(script);
-//     $("#tmpScript").remove();
-// }
-
 
 // Listen for messages
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) 
@@ -112,7 +92,6 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse)
     }
 
     //ParseTextToVector("hello dude");
-
     // If the received message has the expected format...
     //if (msg.text && (msg.text == "report_back")) 
     //{
