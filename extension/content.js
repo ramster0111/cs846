@@ -68,7 +68,7 @@ function InsertToAceEditor(message)
     script.id = 'tmpScript';
     script.appendChild(document.createTextNode(scriptContent));
     document.body.appendChild(script);
-    $("#tmpScript").remove();
+    //$("#tmpScript").remove();
 }
 
 // function InsertToAceEditorWithSpaces(message)
@@ -99,35 +99,17 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse)
     if(msg.text && (msg.text == "insert_text")) 
     {
         var stringArray = ParseVectorToUnicode(msg.data);
-        //InsertToAceEditor( stringArray);
-//
-        //alert(stringToInsert);
-        //InsertToAceEditor(stringToInsert);
-
         InsertANewline();
         InsertToAceEditor("/*");
-
         console.log(stringArray.length);
         for(a = 0; a < stringArray.length; a++)
         {
            InsertANewline();
            InsertToAceEditor( "* " + stringArray[a]);
         }
-
-
         InsertANewline();
         InsertToAceEditor("*/");
-
-        //DummyFUnction();
-
-        //alert(msg.data);
-        //alert("insert_text 2");
-        //sendResponse(document.getElementById("blob_contents").value);
     }
-    // else if(msg.text && (msg.text == "clicked"))
-    // {
-    //     alert("click'");
-    // }
 
     //ParseTextToVector("hello dude");
 
