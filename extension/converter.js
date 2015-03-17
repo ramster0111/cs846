@@ -54,7 +54,7 @@ function setCharAt(str,index,chr)
     return str.substr(0,index) + chr + str.substr(index+1);
 }
 
-function DrawCorner(stringArray, line)
+function DrawCorner(stringArray, arrayMap, line)
 {
 	var x0 = line.x0;
 	var x1 = line.x1;
@@ -113,7 +113,7 @@ function DrawCorner(stringArray, line)
 	}
 }
 
-function DrawArrow(stringArray, aLine)
+function DrawArrow(stringArray, arrayMap, aLine)
 {
 	var xStart = 0;
 	var yStart = 0;
@@ -154,9 +154,11 @@ function DrawArrow(stringArray, aLine)
 		// pointing up
 		stringArray[aLine.y2 / gridSize] = setCharAt(stringArray[aLine.y2 / gridSize], aLine.x2 / gridSize, tTriangle);
 	}
+
+	arrayMap[aLine.x2 / gridSize][aLine.y2 / gridSize] = 0;
 }
 
-function DrawAStraightLine(stringArray, xStart, yStart, xEnd, yEnd)
+function DrawAStraightLine(stringArray, arrayMap, xStart, yStart, xEnd, yEnd)
 {
 	if(xStart > xEnd) { xEnd = [xStart, xStart = xEnd][0]; }
 
@@ -174,6 +176,9 @@ function DrawAStraightLine(stringArray, xStart, yStart, xEnd, yEnd)
 		{
 			stringArray[a] = setCharAt(stringArray[a],x1, vLine);
 			stringArray[a] = setCharAt(stringArray[a],x2, vLine);
+
+			arrayMap[x1][a] = 1;
+			arrayMap[x2][a] = 1;
 		}
 	}
 	else if(xStart != xEnd && yStart == yEnd)
@@ -185,8 +190,144 @@ function DrawAStraightLine(stringArray, xStart, yStart, xEnd, yEnd)
 		{
 			stringArray[y1] = setCharAt(stringArray[y1], a, hLine);
 			stringArray[y2] = setCharAt(stringArray[y2], a, hLine);
+
+			arrayMap[a][y1] = 1;
+			arrayMap[a][y2] = 1;
 		}
 	}
+}
+
+function AddIntersections(stringArray, arrayMap, x, y)
+{
+	var textWidth = oriWidth / gridSize;
+	var textHeight = oriHeight / gridSize;
+
+	var selfcell  = false; 
+	var tNeighbor = false;	// top
+	var rNeighbor = false;	// right
+	var bNeighbor = false;  // bottom
+	var lNeighbor = false;  // left
+
+	var tlNeighbor =  false;
+	var trNeighbor = false;
+	var blNeighbor = false;
+	var brNeighbor = false;
+
+	//console.log(x + " - " + y + " - " + textWidth + " - " + textHeight );
+
+	// self
+	if(arrayMap[x][y] == 1)
+	{
+		selfcell = true;
+	}
+
+	// top neighbor
+	if(y - 1 >= 0 && arrayMap[x][y - 1] == 1)
+	{
+		tNeighbor = true;
+	}
+
+	// right neighbor
+	if(x + 1 < textWidth && arrayMap[x + 1][y] == 1)
+	{
+		rNeighbor = true;
+	}
+
+	// bottom neighbor
+	if(y + 1 < textHeight && arrayMap[x][y + 1] == 1)
+	{
+		bNeighbor = true;
+	}
+
+	// left neighbor
+	if(x - 1 >= 0 && arrayMap[x - 1][y] == 1)
+	{
+		lNeighbor = true;
+	}
+
+
+	// topleft neighbor
+	if(x - 1 >= 0 && y - 1 >= 0 && arrayMap[x - 1][y - 1] == 1)
+	{
+		tlNeighbor = true;
+	}
+
+	// topright neighbor
+	if(x + 1 < textWidth && y - 1 >= 0 && arrayMap[x + 1][y - 1] == 1)
+	{
+		trNeighbor = true;
+	}
+
+	// bottomleft neighbor
+	if(x - 1 >= 0 && y + 1 < textHeight && arrayMap[x - 1][y + 1] == 1)
+	{
+		blNeighbor = true;
+	}
+
+	// bottomright neighbor
+	if(x + 1 < textWidth && y + 1 < textHeight && arrayMap[x + 1][y + 1] == 1)
+	{
+		brNeighbor = true;
+	}
+
+	//var repChar = "";
+
+	//var tlCorner = "┏";
+	if(selfcell && !tNeighbor && rNeighbor && bNeighbor && !lNeighbor)
+	{
+		stringArray[y] = setCharAt(stringArray[y], x, tlCorner);
+	}
+	
+	//var trCorner = "┓";
+	if(selfcell && !tNeighbor && !rNeighbor && bNeighbor && lNeighbor)
+	{
+		stringArray[y] = setCharAt(stringArray[y], x, trCorner);
+	}
+
+	//var blCorner = "┗";
+	if(selfcell && tNeighbor && rNeighbor && !bNeighbor && !lNeighbor)
+	{
+		stringArray[y] = setCharAt(stringArray[y], x, blCorner);
+	}
+	
+	//var brCorner = "┛";
+	if(selfcell && tNeighbor && !rNeighbor && !bNeighbor && lNeighbor)
+	{
+		stringArray[y] = setCharAt(stringArray[y], x, brCorner);
+	}
+
+	//var rFork = "┣";	
+	if(selfcell && tNeighbor && rNeighbor && bNeighbor && !lNeighbor && !brNeighbor && !trNeighbor)
+	{
+		stringArray[y] = setCharAt(stringArray[y], x, rFork);
+	}
+
+	//var lFork = "┫";
+	if(selfcell && tNeighbor && !rNeighbor && bNeighbor && lNeighbor && !blNeighbor && !tlNeighbor)
+	{
+		stringArray[y] = setCharAt(stringArray[y], x, lFork);
+	}
+
+	//var bFork = "┳";
+	if(selfcell && !tNeighbor && rNeighbor && bNeighbor && lNeighbor && !blNeighbor && !brNeighbor)
+	{
+		stringArray[y] = setCharAt(stringArray[y], x, bFork);
+	}
+
+	//var tFork = "┻";
+	if(selfcell && tNeighbor && rNeighbor && !bNeighbor && lNeighbor && !tlNeighbor && !trNeighbor)
+	{
+		stringArray[y] = setCharAt(stringArray[y], x, tFork);
+	}
+
+	// THIS IS TOO COMPLICATED
+	//var intersection = "╋";
+	if(selfcell && tNeighbor && rNeighbor && bNeighbor && lNeighbor && !tlNeighbor && !trNeighbor && !blNeighbor && !brNeighbor)
+	{
+		stringArray[y] = setCharAt(stringArray[y], x, intersection);
+	}
+
+	
 }
 
 // not done yet
@@ -199,6 +340,21 @@ function ParseVectorToUnicode(dataInput)
 	var textWidth = oriWidth / gridSize;
 	var textHeight = oriHeight / gridSize;
 	var stringArray = [];
+
+	var arrayMap = new Array(textWidth);
+	for (var i = 0; i < textWidth; i++)
+	{
+		arrayMap[i] = new Array(textHeight);
+	}
+	for (a = 0; a < textHeight; a++)
+	{
+		for (b = 0; b < textWidth; b++)
+		{
+			arrayMap[b][a] = 0;
+		}
+		debugString += "\n";
+	}
+
 	console.log(textWidth + " --- " + textHeight);
 	for(a = 0; a < textHeight; a++)
 	{
@@ -222,6 +378,9 @@ function ParseVectorToUnicode(dataInput)
 		{
 			stringArray[a] = setCharAt(stringArray[a],x1, vLine);
 			stringArray[a] = setCharAt(stringArray[a],x2, vLine);
+
+			arrayMap[x1][a] = 1;
+			arrayMap[x2][a] = 1;
 		}
 
 		// horizontal
@@ -231,23 +390,30 @@ function ParseVectorToUnicode(dataInput)
 		{
 			stringArray[y1] = setCharAt(stringArray[y1], a, hLine);
 			stringArray[y2] = setCharAt(stringArray[y2], a, hLine);
+
+			arrayMap[a][y1] = 1;
+			arrayMap[a][y2] = 1;
 		}
 		
 		stringArray[y1] = setCharAt(stringArray[y1], x1, tlCorner);	// topleft		
 		stringArray[y1] = setCharAt(stringArray[y1], x2, trCorner);	// topright		
 		stringArray[y2] = setCharAt(stringArray[y2], x1, blCorner);	// bottomleft		
 		stringArray[y2] = setCharAt(stringArray[y2], x2, brCorner);	// bottomright
+
+		arrayMap[x1][y1] = 1;
+		arrayMap[x2][y1] = 1;
+		arrayMap[x1][y2] = 1;
+		arrayMap[x2][y2] = 1;
 	}	
 
 	// parse lines
 	for(i = 0; i < lines.length; i++)
 	{		
 		var line = lines[i];		
-		DrawAStraightLine(stringArray, line.x0, line.y0, line.x1, line.y1);		// p0 --> p1
-		DrawAStraightLine(stringArray, line.x1, line.y1, line.x2, line.y2);		// p1 --> p2
-		DrawCorner(stringArray, line);
+		DrawAStraightLine(stringArray, arrayMap, line.x0, line.y0, line.x1, line.y1);		// p0 --> p1
+		DrawAStraightLine(stringArray, arrayMap, line.x1, line.y1, line.x2, line.y2);		// p1 --> p2
+		DrawCorner(stringArray, arrayMap, line);
 		console.log(line.x0 + " - " + line.y0 + " | " + line.x1 + " - " + line.y1 + " | " + line.x2 + " - " + line.y2);
-		//debugString += line.x0 + " - " + line.y0 + " | " + line.x1 + " - " + line.y1 + " | " + line.x2 + " - " + line.y2 + "\n";
 
 	}
 	
@@ -256,12 +422,35 @@ function ParseVectorToUnicode(dataInput)
 	for(i = 0; i < arrowlines.length; i++)
 	{		
 		var aline = arrowlines[i];
-		DrawAStraightLine(stringArray, aline.x0, aline.y0, aline.x1, aline.y1);		// p0 --> p1
-		DrawAStraightLine(stringArray, aline.x1, aline.y1, aline.x2, aline.y2);		// p1 --> p2
-		DrawArrow(stringArray, aline);
-		DrawCorner(stringArray, aline);
+		DrawAStraightLine(stringArray, arrayMap, aline.x0, aline.y0, aline.x1, aline.y1);		// p0 --> p1
+		DrawAStraightLine(stringArray, arrayMap, aline.x1, aline.y1, aline.x2, aline.y2);		// p1 --> p2
+		DrawArrow(stringArray, arrayMap, aline);
+		DrawCorner(stringArray, arrayMap, aline);
 		console.log(aline.x0 + " - " + aline.y0 + " | " + aline.x1 + " - " + aline.y1 + " | " + aline.x2 + " - " + aline.y2);
 	}
+
+
+	// STIL BUGGY
+	for (a = 0; a < textHeight; a++)
+	{
+		for (b = 0; b < textWidth; b++)
+		{
+			AddIntersections(stringArray, arrayMap, b, a);
+		}
+	}
+
+	//AddIntersections(stringArray, arrayMap, x, y)
+
+	var debugString = "";
+	for (a = 0; a < textHeight; a++)
+	{
+		for (b = 0; b < textWidth; b++)
+		{
+			debugString += arrayMap[b][a];
+		}
+		debugString += "\n";
+	}
+	console.log(debugString);
 
 	return stringArray;
 }
