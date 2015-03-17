@@ -9,11 +9,8 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse)
     switch (request.directive) 
     {
     case "insertdiagram":
-        //if(request.data)
-        //{
-        //    alert("background.js diagram is delivered, data is OK, tab ID is " + currentTabID);
-        //}
-        chrome.tabs.sendMessage(currentTabID, { text: "insert_text", data: request.data}, function(response) {
+        chrome.tabs.sendMessage(currentTabID, { text: "insert_text", data: request.data}, function(response) 
+        {
             //console.log(response.farewell);
         });
         break;
@@ -40,15 +37,10 @@ chrome.tabs.onUpdated.addListener(function(tabID, changeInfo, tab)
 	}
     else
     {
-        //console.log("3");
         chrome.browserAction.disable(tabID);
         chrome.browserAction.setIcon({path: "images/icon16disable.png"});
     }
 });
-
-// chrome.browserAction.onClicked.addListener(function (tab) {
-//     alert("icon clicked");
-// });
 
 
 chrome.browserAction.onClicked.addListener(function() 

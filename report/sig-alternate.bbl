@@ -1,0 +1,16 @@
+\begin{thebibliography}{1}
+
+\bibitem{Eunyoung2010}
+E.~Chung, C.~Jensen, K.~Yatani, V.~Kuechler, and K.~Truong.
+\newblock Sketching and drawing in the design of open source software.
+\newblock In {\em Visual Languages and Human-Centric Computing (VL/HCC), 2010
+  IEEE Symposium on}, Sept 2010.
+
+\bibitem{Yatani2009}
+K.~Yatani, E.~Chung, C.~Jensen, and K.~N. Truong.
+\newblock Understanding how and why open source contributors use diagrams in
+  the development of ubuntu.
+\newblock In {\em Proceedings of the SIGCHI Conference on Human Factors in
+  Computing Systems}, CHI '09, New York, NY, USA, 2009. ACM.
+
+\end{thebibliography}

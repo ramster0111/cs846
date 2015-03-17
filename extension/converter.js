@@ -38,8 +38,9 @@ var slash = "╱";
 var backslash = "╲";
 var cross = "╳";
 
-var oriWidth = 600;
-var oriHeight = 300;
+// ADD 10
+var oriWidth = 610;
+var oriHeight = 310;
 var gridSize = 10;
 
 // not done yet

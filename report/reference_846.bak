@@ -1,0 +1,30 @@
+% This file was created with JabRef 2.10.
+% Encoding: UTF-8
+
+
+@InProceedings{5635226,
+  Title                    = {Sketching and Drawing in the Design of Open Source Software},
+  Author                   = {Eunyoung Chung and Jensen, C. and Yatani, K. and Kuechler, V. and Truong, K.N.},
+  Booktitle                = {Visual Languages and Human-Centric Computing (VL/HCC), 2010 IEEE Symposium on},
+  Year                     = {2010},
+  Month                    = {Sept},
+
+  Doi                      = {10.1109/VLHCC.2010.34},
+  ISSN                     = {1943-6092}
+}
+
+@InProceedings{Yatani:2009:UWO:1518701.1518853,
+  Title                    = {Understanding How and Why Open Source Contributors Use Diagrams in the Development of Ubuntu},
+  Author                   = {Yatani, Koji and Chung, Eunyoung and Jensen, Carlos and Truong, Khai N.},
+  Booktitle                = {Proceedings of the SIGCHI Conference on Human Factors in Computing Systems},
+  Year                     = {2009},
+
+  Address                  = {New York, NY, USA},
+  Publisher                = {ACM},
+  Series                   = {CHI '09},
+
+  Acmid                    = {1518853},
+  Doi                      = {10.1145/1518701.1518853},
+  Url                      = {http://doi.acm.org/10.1145/1518701.1518853}
+}
+
