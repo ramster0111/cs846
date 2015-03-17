@@ -208,7 +208,7 @@ function AddIntersections(stringArray, arrayMap, x, y)
 	var bNeighbor = false;  // bottom
 	var lNeighbor = false;  // left
 
-	var tlNeighbor =  false;
+	var tlNeighbor = false;
 	var trNeighbor = false;
 	var blNeighbor = false;
 	var brNeighbor = false;
@@ -217,115 +217,79 @@ function AddIntersections(stringArray, arrayMap, x, y)
 
 	// self
 	if(arrayMap[x][y] == 1)
-	{
-		selfcell = true;
-	}
+		{ selfcell = true; }
 
 	// top neighbor
 	if(y - 1 >= 0 && arrayMap[x][y - 1] == 1)
-	{
-		tNeighbor = true;
-	}
+		{ tNeighbor = true; }
 
 	// right neighbor
 	if(x + 1 < textWidth && arrayMap[x + 1][y] == 1)
-	{
-		rNeighbor = true;
-	}
+		{ rNeighbor = true; }
 
 	// bottom neighbor
 	if(y + 1 < textHeight && arrayMap[x][y + 1] == 1)
-	{
-		bNeighbor = true;
-	}
+		{ bNeighbor = true; }
 
 	// left neighbor
 	if(x - 1 >= 0 && arrayMap[x - 1][y] == 1)
-	{
-		lNeighbor = true;
-	}
+		{ lNeighbor = true; }
 
 
 	// topleft neighbor
 	if(x - 1 >= 0 && y - 1 >= 0 && arrayMap[x - 1][y - 1] == 1)
-	{
-		tlNeighbor = true;
-	}
+		{ tlNeighbor = true; }
 
 	// topright neighbor
 	if(x + 1 < textWidth && y - 1 >= 0 && arrayMap[x + 1][y - 1] == 1)
-	{
-		trNeighbor = true;
-	}
+		{ trNeighbor = true; }
 
 	// bottomleft neighbor
 	if(x - 1 >= 0 && y + 1 < textHeight && arrayMap[x - 1][y + 1] == 1)
-	{
-		blNeighbor = true;
-	}
+		{ blNeighbor = true; }
 
 	// bottomright neighbor
 	if(x + 1 < textWidth && y + 1 < textHeight && arrayMap[x + 1][y + 1] == 1)
-	{
-		brNeighbor = true;
-	}
+		{ brNeighbor = true; }
 
 	//var repChar = "";
 
 	//var tlCorner = "┏";
 	if(selfcell && !tNeighbor && rNeighbor && bNeighbor && !lNeighbor)
-	{
-		stringArray[y] = setCharAt(stringArray[y], x, tlCorner);
-	}
+		{ stringArray[y] = setCharAt(stringArray[y], x, tlCorner); }
 	
 	//var trCorner = "┓";
 	if(selfcell && !tNeighbor && !rNeighbor && bNeighbor && lNeighbor)
-	{
-		stringArray[y] = setCharAt(stringArray[y], x, trCorner);
-	}
+		{ stringArray[y] = setCharAt(stringArray[y], x, trCorner); }
 
 	//var blCorner = "┗";
 	if(selfcell && tNeighbor && rNeighbor && !bNeighbor && !lNeighbor)
-	{
-		stringArray[y] = setCharAt(stringArray[y], x, blCorner);
-	}
+		{ stringArray[y] = setCharAt(stringArray[y], x, blCorner); }
 	
 	//var brCorner = "┛";
 	if(selfcell && tNeighbor && !rNeighbor && !bNeighbor && lNeighbor)
-	{
-		stringArray[y] = setCharAt(stringArray[y], x, brCorner);
-	}
+		{ stringArray[y] = setCharAt(stringArray[y], x, brCorner); }
 
 	//var rFork = "┣";	
 	if(selfcell && tNeighbor && rNeighbor && bNeighbor && !lNeighbor && !brNeighbor && !trNeighbor)
-	{
-		stringArray[y] = setCharAt(stringArray[y], x, rFork);
-	}
+		{ stringArray[y] = setCharAt(stringArray[y], x, rFork); }
 
 	//var lFork = "┫";
 	if(selfcell && tNeighbor && !rNeighbor && bNeighbor && lNeighbor && !blNeighbor && !tlNeighbor)
-	{
-		stringArray[y] = setCharAt(stringArray[y], x, lFork);
-	}
+		{ stringArray[y] = setCharAt(stringArray[y], x, lFork); }
 
 	//var bFork = "┳";
 	if(selfcell && !tNeighbor && rNeighbor && bNeighbor && lNeighbor && !blNeighbor && !brNeighbor)
-	{
-		stringArray[y] = setCharAt(stringArray[y], x, bFork);
-	}
+		{ stringArray[y] = setCharAt(stringArray[y], x, bFork); }
 
 	//var tFork = "┻";
 	if(selfcell && tNeighbor && rNeighbor && !bNeighbor && lNeighbor && !tlNeighbor && !trNeighbor)
-	{
-		stringArray[y] = setCharAt(stringArray[y], x, tFork);
-	}
+		{ stringArray[y] = setCharAt(stringArray[y], x, tFork); }
 
 	// THIS IS TOO COMPLICATED
 	//var intersection = "╋";
 	if(selfcell && tNeighbor && rNeighbor && bNeighbor && lNeighbor && !tlNeighbor && !trNeighbor && !blNeighbor && !brNeighbor)
-	{
-		stringArray[y] = setCharAt(stringArray[y], x, intersection);
-	}
+		{ stringArray[y] = setCharAt(stringArray[y], x, intersection); }
 
 	
 }
@@ -352,7 +316,6 @@ function ParseVectorToUnicode(dataInput)
 		{
 			arrayMap[b][a] = 0;
 		}
-		debugString += "\n";
 	}
 
 	console.log(textWidth + " --- " + textHeight);
@@ -439,8 +402,7 @@ function ParseVectorToUnicode(dataInput)
 		}
 	}
 
-	//AddIntersections(stringArray, arrayMap, x, y)
-
+	/*
 	var debugString = "";
 	for (a = 0; a < textHeight; a++)
 	{
@@ -451,6 +413,7 @@ function ParseVectorToUnicode(dataInput)
 		debugString += "\n";
 	}
 	console.log(debugString);
+	*/
 
 	return stringArray;
 }

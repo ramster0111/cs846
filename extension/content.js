@@ -85,13 +85,17 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse)
         console.log(stringArray.length);
         for(a = 0; a < stringArray.length; a++)
         {
+            if(a < 3)
+            {
+                continue;
+            }
            InsertANewline();
            InsertToAceEditor( "* " + stringArray[a]);
         }
         InsertANewline();
         InsertToAceEditor("*/");
     }
-
+    
     //ParseTextToVector("hello dude");
     // If the received message has the expected format...
     //if (msg.text && (msg.text == "report_back")) 

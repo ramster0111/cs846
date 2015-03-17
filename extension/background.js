@@ -2,39 +2,45 @@
 // background.js cannot interact with DOM, use content.js instead
 
 
-var currentTabID;
+var currentTabID = -1;
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) 
 {
     switch (request.directive) 
     {
     case "insertdiagram":
+        //if(request.data)
+        //{
+        //    alert("background.js diagram is delivered, data is OK, tab ID is " + currentTabID);
+        //}
         chrome.tabs.sendMessage(currentTabID, { text: "insert_text", data: request.data}, function(response) {
-            console.log(response.farewell);
+            //console.log(response.farewell);
         });
-        sendResponse({});
         break;
     case "canceldiagram":
         // do nothing
-        sendResponse({});
         break;
+        
     }
+    sendResponse({});
 });
 
 chrome.tabs.onUpdated.addListener(function(tabID, changeInfo, tab)
 {
+    if(tabID)
+    {
+        currentTabID = tabID;
+    }
+
     var splitString = tab.url.split( '/' );
 	if(tab.url.match(/https:\/\/(gist.)?github.com/) && splitString.length >= 5 && splitString[5].match("edit"))
 	{
-		// retrieving dom
-		//chrome.tabs.sendMessage(tab.id, { text: "report_back" }, doStuffWithDOM);
-        currentTabID = tabID;
         chrome.browserAction.enable(tabID);
         chrome.browserAction.setIcon({path: "images/icon16.png"});
 	}
     else
     {
-        console.log("3");
+        //console.log("3");
         chrome.browserAction.disable(tabID);
         chrome.browserAction.setIcon({path: "images/icon16disable.png"});
     }
