@@ -27,10 +27,9 @@
 
 
   // listener.js is used to detect when a user is editing a file on github
-  // should be persistent
   "background": 
   {
-    "persistent": true,
+    "persistent": false,
     "scripts":    [ "background.js" ]
     //"page": "background.html"
   },
@@ -41,7 +40,7 @@
   [{
     "matches": ["*://*.github.com/*/edit/*"],
     "js":      ["ace.js", "jquery.js", "converter.js", "content.js"]
-    //"js":      [jquery-ui.js"],
+    //"js":      ["content.js", "jquery.js", "jquery-ui.js"],
     //"css":     [ "jquery-ui.css"]
   }],
 
