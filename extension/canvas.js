@@ -69,6 +69,89 @@ document.addEventListener('DOMContentLoaded', function ()
 
 var drawingCanvas = (function () {
 
+	drawingtools.erase = function () {
+			var tool = this;
+			this.started = false;
+
+			this.isOnLine = function isOnLine(initial_x, initial_y, endx, endy, pointx, pointy) {
+				var slope = (endy-initial_y)/(endx-initial_x);
+				var y = slope * pointx + initial_y;
+
+				if( endx - initial_x == 0){
+					if ( pointy > initial_y && pointy <  endy && pointx == initial_x)
+						return true;
+				}
+				
+				if((y <= pointy+.2 && y >= pointy-.2) && (pointx >= initial_x && pointx <= endx)) {
+					return true;
+				}				
+				return false;
+			}
+
+			this.mousedown = function (ev) {
+				img_update();
+				tool.x0 = ev._x;
+				tool.y0 = ev._y;
+				tool.x0 = Math.round(tool.x0 / 10) * 10;
+				tool.y0 = Math.round(tool.y0 / 10) * 10;
+				// first search rectangles
+				for (var j in rectangles) {
+					var l1 = tool.isOnLine(rectangles[j].x, rectangles[j].y, rectangles[j].x + rectangles[j].w, rectangles[j].y , tool.x0, tool.y0);
+					var l2 = tool.isOnLine(rectangles[j].x, rectangles[j].y, rectangles[j].x, rectangles[j].y + rectangles[j].h, tool.x0, tool.y0);
+					var l3 = tool.isOnLine(rectangles[j].x, rectangles[j].y + rectangles[j].h, rectangles[j].x + rectangles[j].w, rectangles[j].y + rectangles[j].h, tool.x0, tool.y0);
+					var l4 = tool.isOnLine(rectangles[j].x + rectangles[j].w, rectangles[j].y, rectangles[j].x + rectangles[j].w, rectangles[j].y + rectangles[j].h, tool.x0, tool.y0);
+
+					if( l1 || l2 || l3 || l4){
+						var index = rectangles.indexOf(rectangles[j]);
+						rectangles.splice(index, 1);
+						this.started = false;
+						ctx.clearRect(0, 31, canvas.width, canvas.height);
+						return;
+					}
+				}
+				
+				for (var j in lines) {
+					var l1 = tool.isOnLine(lines[j].x0, lines[j].y0, lines[j].x1, lines[j].y1, tool.x0, tool.y0);
+					var l2 = tool.isOnLine(lines[j].x1, lines[j].y1, lines[j].x2, lines[j].y2, tool.x0, tool.y0);
+					if( l1 || l2){
+						var index = lines.indexOf(lines[j]);
+						lines.splice(index, 1);
+						ctx.clearRect(0, 31, canvas.width, canvas.height);
+						return;
+					}
+					
+				}
+
+				for (var j in arrowlines) {
+					var l1 = tool.isOnLine(arrowlines[j].x0, arrowlines[j].y0, arrowlines[j].x1, arrowlines[j].y1, tool.x0, tool.y0);
+					var l2 = tool.isOnLine(arrowlines[j].x1, arrowlines[j].y1, arrowlines[j].x2, arrowlines[j].y2, tool.x0, tool.y0);
+					if( l1 || l2){
+						var index = arrowlines.indexOf(arrowlines[j]);
+						//alert(arrowlines[j]);
+						arrowlines.splice(index, 1);
+						ctx.clearRect(0, 31, canvas.width, canvas.height);
+						return;
+					}
+					
+				}				
+			};
+
+			this.mousemove = function (ev) {
+				tool.started = true;
+				img_update();
+				return;
+			};
+
+			this.mouseup = function (ev) {
+				if (tool.started) {
+					tool.started = false;
+					img_update();
+				}
+			};
+			
+	};
+
+
 	drawingtools.line = function () {
 			var tool = this;
 			this.started = false;
@@ -120,14 +203,8 @@ var drawingCanvas = (function () {
 					ctx.stroke();
 					ctx.closePath();
 				}
+				img_update();
 
-
-				/*
-				ctx.moveTo(tool.x0, tool.y0);
-				ctx.lineTo(ev._x, ev._y);
-				ctx.stroke();
-				ctx.closePath();
-				*/
 			};
 
 			this.mouseup = function (ev) {
@@ -166,6 +243,7 @@ var drawingCanvas = (function () {
 				tool.y0 = ev._y;
 				tool.x0 = Math.round(tool.x0 / 10) * 10;
 				tool.y0 = Math.round(tool.y0 / 10) * 10;
+				img_update();
 			};
 
 			this.mousemove = function (ev) {
@@ -233,29 +311,7 @@ var drawingCanvas = (function () {
 					ctx.fill();		
 					
 				}
-
-				/*
-				ctx.beginPath();
-				ctx.moveTo(tool.x0, tool.y0);
-				ctx.lineTo(ev._x, ev._y);
-				ctx.stroke();
-				ctx.closePath();
-*/
-/*				
-				var endRadians = Math.atan((ev._y - tool.y0)/(ev._x - tool.x0));
-				endRadians += ((ev._x >= tool.x0) ? 90 : -90 ) * Math.PI / 180;
-
-				ctx.save();
-				ctx.beginPath();
-				ctx.translate(ev._x,ev._y);
-				ctx.rotate(endRadians);
-				ctx.moveTo(0,0);
-				ctx.lineTo(5,20);
-				ctx.lineTo(-5,20);
-				ctx.closePath();
-				ctx.restore();
-				ctx.fill();		
-*/
+				img_update();
 			};
 
 			this.mouseup = function (ev) {
@@ -313,13 +369,12 @@ var drawingCanvas = (function () {
 				w = Math.round(w / 10) * 10;
 				h = Math.round(h / 10) * 10;
 
-
 				ctx.clearRect(0, 31, canvas.width, canvas.height);
-
 				if (!w || !h) {
 					return;
 				}
 				ctx.strokeRect(x, y, w, h);
+				img_update();
 			};
 
 			this.mouseup = function (ev) {
@@ -330,7 +385,8 @@ var drawingCanvas = (function () {
 					storerectobject.y = y;
 					storerectobject.w = w;
 					storerectobject.h = h;
-					rectangles.push(storerectobject);
+					if ( w!=0 && h!=0)
+						rectangles.push(storerectobject);
 					tool.started = false;
 					img_update();
 				}
@@ -402,7 +458,9 @@ var drawingCanvas = (function () {
 				else if(ev._x < 120){
 					 tool_selected = 'text';
 				}
-				
+				else if(ev._x < 150){
+					 tool_selected = 'erase';
+				}
 				if (drawingtools[tool_selected]) {
 						drawingtool = new drawingtools[tool_selected]();
 						drawingtool.value = tool_selected;
@@ -421,30 +479,73 @@ var drawingCanvas = (function () {
 	
 	function img_update () {
 	
-	/*
-		for (var x = 0; x < 601; x += 10) {
-			//ctx.save();
-				ctx.setLineDash([2]);
-				ctx.strokeRect(x, 30, 20, 20);
-			//ctx.restore();
-		}
-	*/
-		ctxo.drawImage(canvas, 0, 0);
-		ctx.clearRect(0, 31, canvas.width, canvas.height);
-		
-/* Lines not working ???		
+		ctxo.clearRect(0, 31, canvas.width, canvas.height);
+
 		for (var x = 0.5; x < 601; x += 10) {
-			ctx.beginPath();
-			ctx.moveTo(x, 0);
-			ctx.lineTo(x, 381);
-			ctx.closePath();
+				ctxo.save();
+				ctxo.setLineDash([1,2]);
+				ctxo.beginPath();
+				ctxo.moveTo(x,31);
+				ctxo.lineTo(x,300);
+				ctxo.stroke();
+				ctxo.restore();
 		}
 
-		for (var y = 30.5; y < 301; y += 10) {
-			ctx.moveTo(30, y);
-			ctx.lineTo(500, y);
+		for (var y = 31.5; y < 301; y += 10) {
+				ctxo.save();
+				ctxo.setLineDash([1,2]);
+				ctxo.beginPath();
+				ctxo.moveTo(0,y);
+				ctxo.lineTo(600,y);
+				ctxo.stroke();
+				ctxo.restore();
 		}
-*/		
+
+		for (var j in rectangles) {
+			ctx.strokeRect(rectangles[j].x, rectangles[j].y, rectangles[j].w, rectangles[j].h);		
+		}	
+		
+		for (var j in lines) {		
+					ctx.beginPath();
+					ctx.moveTo(lines[j].x0, lines[j].y0);
+					ctx.lineTo(lines[j].x1, lines[j].y1);
+					ctx.stroke();
+					ctx.closePath();
+					
+					ctx.beginPath();
+					ctx.moveTo(lines[j].x1, lines[j].y1);
+					ctx.lineTo(lines[j].x2, lines[j].y2);
+					ctx.stroke();
+					ctx.closePath();
+		}
+
+		for (var j in arrowlines) {		
+					ctx.beginPath();
+					ctx.moveTo(arrowlines[j].x0, arrowlines[j].y0);
+					ctx.lineTo(arrowlines[j].x1, arrowlines[j].y1);
+					ctx.stroke();
+					ctx.closePath();
+					
+					ctx.beginPath();
+					ctx.moveTo(arrowlines[j].x1, arrowlines[j].y1);
+					ctx.lineTo(arrowlines[j].x2, arrowlines[j].y2);
+					ctx.stroke();
+					ctx.closePath();
+					
+					var endRadians = Math.atan((arrowlines[j].y2- arrowlines[j].y1)/(arrowlines[j].x2 - arrowlines[j].x1));
+					endRadians += ((arrowlines[j].x2 >= arrowlines[j].x1) ? 90 : -90 ) * Math.PI / 180;
+
+					ctx.save();
+					ctx.beginPath();
+					ctx.translate(arrowlines[j].x2, arrowlines[j].y2);
+					ctx.rotate(endRadians);
+					ctx.moveTo(0,0);
+					ctx.lineTo(5,10);
+					ctx.lineTo(-5,10);
+					ctx.closePath();
+					ctx.restore();
+					ctx.fill();				
+		}
 		
 	}
 
@@ -453,29 +554,7 @@ var drawingCanvas = (function () {
 			canvaso = document.getElementById('Canvas');
 		
 			if (canvaso.getContext) {
-				ctxo = canvaso.getContext('2d');
-
-				for (var x = 0.5; x < 601; x += 10) {
-					ctxo.save();
-					ctxo.setLineDash([1,2]);
-					ctxo.beginPath();
-					ctxo.moveTo(x,31);
-					ctxo.lineTo(x,300);
-					ctxo.stroke();
-				}
-
-				for (var y = 31.5; y < 301; y += 10) {
-					ctxo.save();
-					ctxo.setLineDash([1,2]);
-					ctxo.beginPath();
-					ctxo.moveTo(0,y);
-					ctxo.lineTo(600,y);
-					ctxo.stroke();
-				}
-
-				//ctxo.strokeRect(x, 30, 20, 20);
-			//ctx.restore();
-				
+				ctxo = canvaso.getContext('2d');			
 				
 				var rectImage = new Image();   // a
 				var lineImage = new Image();   // b 
@@ -497,7 +576,7 @@ var drawingCanvas = (function () {
 				container.appendChild(canvas);
 
 				ctx = canvas.getContext('2d');		
-				
+				ctx.strokeStyle = '#000000';
 				// Load images
 				rectImage.src = "images/rect.png";
 				rectImage.onload = function() {
@@ -536,7 +615,7 @@ var drawingCanvas = (function () {
 				drawingtool = new drawingtools[tool_selected]();
 				drawingtool.value = tool_selected;
 			}
-			
+			img_update();
 			canvas.addEventListener("mousedown", mouseDownEvent, true);
 			canvas.addEventListener("mousemove", mouseEvent, false);
 			canvas.addEventListener("mouseup", mouseEvent);
