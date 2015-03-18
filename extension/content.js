@@ -6,13 +6,67 @@
 
 document.onmousedown = mouseDown;
 
+/*
+var script0 = document.createElement('link');
+script0.rel = "stylesheet";
+script0.type = "text/css";
+script0.href = "https://fonts.googleapis.com/css?family=Droid+Sans+Mono"
+document.head.appendChild(script0);
+*/
+
+/*
+var scriptContent1 = "document.querySelector('.ace_editor').env.editor.setOptions({ fontFamily: 'Droid Sans Mono', fontSize: '10pt' });";
+var script1 = document.createElement('script');
+script1.id = 'tmpScriptInit';
+script1.appendChild(document.createTextNode(scriptContent1));
+document.body.appendChild(script1);*/
+
 function mouseDown(e)
 {
 }
 
+/*function NavigateLeft()
+{
+    var scriptContent = "document.querySelector('.ace_editor').env.editor.navigateLeft(1);";
+    var script = document.createElement('script');
+    script.id = 'tmpScript';
+    script.appendChild(document.createTextNode(scriptContent));
+    document.body.appendChild(script);
+    $("#tmpScript").remove();
+}*/
+
+/*function NavigateRight()
+{
+    var scriptContent = "document.querySelector('.ace_editor').env.editor.navigateRight(1);";
+    var script = document.createElement('script');
+    script.id = 'tmpScript';
+    script.appendChild(document.createTextNode(scriptContent));
+    document.body.appendChild(script);
+    $("#tmpScript").remove();
+}*/
+
+function InsertANewline()
+{
+    var scriptContent = "document.querySelector('.ace_editor').env.editor.insert('\\n'); ";
+    var script = document.createElement('script');
+    script.id = 'tmpScript';
+    script.appendChild(document.createTextNode(scriptContent));
+    document.body.appendChild(script);
+    $("#tmpScript").remove();
+
+    /*
+    var scriptContent = "document.querySelector('.ace_editor').env.editor.splitLine(); document.querySelector('.ace_editor').env.editor.navigateDown(1);";
+    var script = document.createElement('script');
+    script.id = 'tmpScript';
+    script.appendChild(document.createTextNode(scriptContent));
+    document.body.appendChild(script);
+    $("#tmpScript").remove();
+    */
+}
+
 function InsertToAceEditor(message)
 {
-    var scriptContent = "document.querySelector('.ace_editor').env.editor.insert('" +  message+ " ')";
+    var scriptContent = "document.querySelector('.ace_editor').env.editor.insert('" +  message + " ')";
     var script = document.createElement('script');
     script.id = 'tmpScript';
     script.appendChild(document.createTextNode(scriptContent));
@@ -20,40 +74,29 @@ function InsertToAceEditor(message)
     $("#tmpScript").remove();
 }
 
-
 // Listen for messages
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) 
 {
     if(msg.text && (msg.text == "insert_text")) 
     {
-
-        InsertToAceEditor("HELLO WORLD");
-
-        // var dataString = "";
-        // for (i = 0; i < msg.data.length; i++)
-        // {
-        //     dataString += msg.data[i] + " - ";
-        // }
-        // alert("content.js" + dataString);
-
-        // if (document.selection) 
-        // {
-        //     alert("document selection");
-        // }
-        
-        
-
-        //alert(msg.data);
-        //alert("insert_text 2");
-        //sendResponse(document.getElementById("blob_contents").value);
+        var stringArray = ParseVectorToUnicode(msg.data);
+        InsertANewline();
+        InsertToAceEditor("/*");
+        console.log(stringArray.length);
+        for(a = 0; a < stringArray.length; a++)
+        {
+            if(a < 3)
+            {
+                continue;
+            }
+           InsertANewline();
+           InsertToAceEditor( "* " + stringArray[a]);
+        }
+        InsertANewline();
+        InsertToAceEditor("*/");
     }
-    // else if(msg.text && (msg.text == "clicked"))
-    // {
-    //     alert("click'");
-    // }
-
+    
     //ParseTextToVector("hello dude");
-
     // If the received message has the expected format...
     //if (msg.text && (msg.text == "report_back")) 
     //{

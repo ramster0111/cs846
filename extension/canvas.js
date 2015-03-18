@@ -11,24 +11,51 @@
 //     $('#insertdiagram').click(function(){InsertDiagram();});
 // });
 
+// http://stackoverflow.com/questions/2659999/html5-canvas-hand-cursor-problems
+document.addEventListener('mousedown', handleMouseDown, false);
+function handleMouseDown(evt) {
+  evt.preventDefault();
+  evt.stopPropagation();
+  evt.target.style.cursor = 'crosshair';
+}
 
-
-var cars = ["Saab", "Volvo", "BMW"];
-
+"use strict";
+	var canvas,
+		ctx,
+		mouse_x_coor,
+		mouse_y_coor,
+		started = false,
+		drawingtool,
+		drawingtools = {},
+		tool_selected = 'rect',
+		tool_default = 'rect',
+		canvaso,
+		rectangles = [],
+		lines = [],
+		arrowlines = [],
+		ctxo;
 
 function InsertDiagram(e) 
 {
-    chrome.runtime.sendMessage({directive: "insertdiagram", data: cars}, function(response) 
+	// prepare data
+	var transferData = {};
+	transferData.rectangles = rectangles;
+	transferData.lines = lines;
+	transferData.arrowlines = arrowlines;
+
+	// send data
+    chrome.runtime.sendMessage({directive: "insertdiagram", data: transferData}, function(response)
     {
-        this.close();
+        window.close();
     });
 }
 
 function CancelDiagram(e) 
 {
+
     chrome.runtime.sendMessage({directive: "canceldiagram"}, function(response) 
     {
-        this.close();
+        window.close();
     });
 }
 
@@ -38,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function ()
     document.getElementById('canceldiagram').addEventListener('click', CancelDiagram);
 })
 
-"use strict";
+
 	var canvas,
 		ctx,
 		mouse_x_coor,
@@ -58,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function ()
 		
 	var cPushArray = new Array();
 	var cStep = -1;
-		
 		
 
 var drawingCanvas = (function () {
@@ -153,7 +179,6 @@ var drawingCanvas = (function () {
 				tool.y0 = ev._y;
 				tool.x0 = Math.round(tool.x0 / 10) * 10;
 				tool.y0 = Math.round(tool.y0 / 10) * 10;
-
 			};
 
 			this.mousemove = function (ev) {
@@ -221,7 +246,29 @@ var drawingCanvas = (function () {
 					ctx.fill();		
 					
 				}
-				
+
+				/*
+				ctx.beginPath();
+				ctx.moveTo(tool.x0, tool.y0);
+				ctx.lineTo(ev._x, ev._y);
+				ctx.stroke();
+				ctx.closePath();
+*/
+/*				
+				var endRadians = Math.atan((ev._y - tool.y0)/(ev._x - tool.x0));
+				endRadians += ((ev._x >= tool.x0) ? 90 : -90 ) * Math.PI / 180;
+
+				ctx.save();
+				ctx.beginPath();
+				ctx.translate(ev._x,ev._y);
+				ctx.rotate(endRadians);
+				ctx.moveTo(0,0);
+				ctx.lineTo(5,20);
+				ctx.lineTo(-5,20);
+				ctx.closePath();
+				ctx.restore();
+				ctx.fill();		
+*/
 			};
 
 			this.mouseup = function (ev) {
