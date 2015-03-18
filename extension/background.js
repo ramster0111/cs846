@@ -2,75 +2,54 @@
 // background.js cannot interact with DOM, use content.js instead
 
 
-//function doStuffWithDOM(element) 
-//{
-//	if(element != null)
-//	{
-//      // content of the source code here
-//      //alert(element);
-//  }
-//}
-
-var currentTabID;
-
-//function InsertDiagramToTextArea(element) 
-//{
-    //alert(element);
-    //alert("insert_text 2");
-//}
-
-
+var currentTabID = -1;
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) 
 {
     switch (request.directive) 
     {
     case "insertdiagram":
-
-        chrome.tabs.sendMessage(currentTabID, { text: "insert_text", data: request.data}, function(response) {
-            console.log(response.farewell);
+        chrome.tabs.sendMessage(currentTabID, { text: "insert_text", data: request.data}, function(response) 
+        {
+            //console.log(response.farewell);
         });
-        sendResponse({});
         break;
     case "canceldiagram":
         // do nothing
-        sendResponse({});
         break;
+        
     }
+    sendResponse({});
 });
 
 chrome.tabs.onUpdated.addListener(function(tabID, changeInfo, tab)
 {
+    if(tabID)
+    {
+        currentTabID = tabID;
+    }
+
     var splitString = tab.url.split( '/' );
 	if(tab.url.match(/https:\/\/(gist.)?github.com/) && splitString.length >= 5 && splitString[5].match("edit"))
 	{
-		// retrieving dom
-		//chrome.tabs.sendMessage(tab.id, { text: "report_back" }, doStuffWithDOM);
-        currentTabID = tabID;
         chrome.browserAction.enable(tabID);
         chrome.browserAction.setIcon({path: "images/icon16.png"});
 	}
     else
     {
-        console.log("3");
         chrome.browserAction.disable(tabID);
         chrome.browserAction.setIcon({path: "images/icon16disable.png"});
     }
 });
 
-// chrome.browserAction.onClicked.addListener(function (tab) {
-//     alert("icon clicked");
-// });
-
 
 chrome.browserAction.onClicked.addListener(function() 
-{
-    
-
+{  
     // chrome.tabs.sendMessage(currentTabID, { text: "clicked"}, function(response) {
     //         console.log(response.farewell);
     //     });
 
+    /*
     var w = 600;
     var h = 300;
 	
@@ -86,5 +65,6 @@ chrome.browserAction.onClicked.addListener(function()
     	'width': w, 
     	'height': h}, 
     	function(window) { });
+    */
 });
 

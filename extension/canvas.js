@@ -11,32 +11,13 @@
 //     $('#insertdiagram').click(function(){InsertDiagram();});
 // });
 
-
-
-var cars = ["Saab", "Volvo", "BMW"];
-
-
-function InsertDiagram(e) 
-{
-    chrome.runtime.sendMessage({directive: "insertdiagram", data: cars}, function(response) 
-    {
-        this.close();
-    });
+// http://stackoverflow.com/questions/2659999/html5-canvas-hand-cursor-problems
+document.addEventListener('mousedown', handleMouseDown, false);
+function handleMouseDown(evt) {
+  evt.preventDefault();
+  evt.stopPropagation();
+  evt.target.style.cursor = 'crosshair';
 }
-
-function CancelDiagram(e) 
-{
-    chrome.runtime.sendMessage({directive: "canceldiagram"}, function(response) 
-    {
-        this.close();
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function () 
-{
-    document.getElementById('insertdiagram').addEventListener('click', InsertDiagram);
-    document.getElementById('canceldiagram').addEventListener('click', CancelDiagram);
-})
 
 "use strict";
 	var canvas,
@@ -52,14 +33,39 @@ document.addEventListener('DOMContentLoaded', function ()
 		rectangles = [],
 		lines = [],
 		arrowlines = [],
-		textentered,
-		textsize,
 		ctxo;
-		
-	var cPushArray = new Array();
-	var cStep = -1;
-		
-		
+
+function InsertDiagram(e) 
+{
+	// prepare data
+	var transferData = {};
+	transferData.rectangles = rectangles;
+	transferData.lines = lines;
+	transferData.arrowlines = arrowlines;
+
+	// send data
+    chrome.runtime.sendMessage({directive: "insertdiagram", data: transferData}, function(response)
+    {
+        window.close();
+    });
+}
+
+function CancelDiagram(e) 
+{
+
+    chrome.runtime.sendMessage({directive: "canceldiagram"}, function(response) 
+    {
+        window.close();
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () 
+{
+    document.getElementById('insertdiagram').addEventListener('click', InsertDiagram);
+    document.getElementById('canceldiagram').addEventListener('click', CancelDiagram);
+})
+
+
 
 var drawingCanvas = (function () {
 
@@ -101,7 +107,7 @@ var drawingCanvas = (function () {
 					ctx.closePath();
 				}
 
-				if (Math.abs(ev._x - tool.x0) =< Math.abs(ev._y - tool.y0)) {
+				if (Math.abs(ev._x - tool.x0) < Math.abs(ev._y - tool.y0)) {
 					ctx.beginPath();
 					ctx.moveTo(tool.x0, tool.y0);
 					ctx.lineTo(tool.x0, ev._y);
@@ -115,6 +121,13 @@ var drawingCanvas = (function () {
 					ctx.closePath();
 				}
 
+
+				/*
+				ctx.moveTo(tool.x0, tool.y0);
+				ctx.lineTo(ev._x, ev._y);
+				ctx.stroke();
+				ctx.closePath();
+				*/
 			};
 
 			this.mouseup = function (ev) {
@@ -128,7 +141,7 @@ var drawingCanvas = (function () {
 							storelineobject.y1 = tool.y0
 	
 					}
-					else if (Math.abs(ev._x - tool.x0) =< Math.abs(ev._y - tool.y0)){
+					else if (Math.abs(ev._x - tool.x0) < Math.abs(ev._y - tool.y0)){
 							storelineobject.x1 = tool.x0
 							storelineobject.y1 = ev._y
 					}
@@ -153,7 +166,6 @@ var drawingCanvas = (function () {
 				tool.y0 = ev._y;
 				tool.x0 = Math.round(tool.x0 / 10) * 10;
 				tool.y0 = Math.round(tool.y0 / 10) * 10;
-
 			};
 
 			this.mousemove = function (ev) {
@@ -193,7 +205,7 @@ var drawingCanvas = (function () {
 					ctx.fill();		
 				}
 
-				if (Math.abs(ev._x - tool.x0) =< Math.abs(ev._y - tool.y0)) {
+				if (Math.abs(ev._x - tool.x0) < Math.abs(ev._y - tool.y0)) {
 					ctx.beginPath();
 					ctx.moveTo(tool.x0, tool.y0);
 					ctx.lineTo(tool.x0, ev._y);
@@ -221,7 +233,29 @@ var drawingCanvas = (function () {
 					ctx.fill();		
 					
 				}
-				
+
+				/*
+				ctx.beginPath();
+				ctx.moveTo(tool.x0, tool.y0);
+				ctx.lineTo(ev._x, ev._y);
+				ctx.stroke();
+				ctx.closePath();
+*/
+/*				
+				var endRadians = Math.atan((ev._y - tool.y0)/(ev._x - tool.x0));
+				endRadians += ((ev._x >= tool.x0) ? 90 : -90 ) * Math.PI / 180;
+
+				ctx.save();
+				ctx.beginPath();
+				ctx.translate(ev._x,ev._y);
+				ctx.rotate(endRadians);
+				ctx.moveTo(0,0);
+				ctx.lineTo(5,20);
+				ctx.lineTo(-5,20);
+				ctx.closePath();
+				ctx.restore();
+				ctx.fill();		
+*/
 			};
 
 			this.mouseup = function (ev) {
@@ -306,61 +340,31 @@ var drawingCanvas = (function () {
 	drawingtools.text = function () {
 			var tool = this;
 			this.started = false;
-			var inputstring = "",
+			var inputstring = "Raminder",
 				textwidth = 20,
 				textheight = 20;
 				
 			this.mousedown = function (ev) {
-					if (tool.started) {
-	//					tool.mousemove(ev);
-						tool.started = false;
-						ctx.font = 'normal 20px Arial';
-						textsize.width = Math.round(textsize.width / 10) * 10;
-						textsize.width += 20;
-						//ctx.strokeRect(tool.x0, tool.y0, textsize.width, -20);
-						ctx.fillText(inputstring, tool.x0, tool.y0);
-						img_update();
-		
-//					ctx.save();
-//					ctx.setLineDash([1,2]);
-//					//ctx.clearRect(tool.x0,tool.y0,textsize.width,-20);
-//					//ctx.strokeRect(tool.x0, tool.y0, textsize.width, -20);
-//					ctx.restore();	
-					}
+				if (!tool.started) {
+					return;
+				}				
+				tool.x0 = ev._x;
+				tool.y0 = ev._y;
 			};
 
 			this.mousemove = function (ev) {
-				if (ev._y < 31 || ev._y > 300) {
-					return;
-				}
-				
-				inputstring = textentered;
 				tool.started = true;
-				tool.x0 = ev._x;
-				tool.y0 = ev._y;
-				tool.x0 = Math.round(tool.x0 / 10) * 10;
-				tool.y0 = Math.round(tool.y0 / 10) * 10;
-
-
-				
-				ctx.clearRect(0, 31, canvas.width, canvas.height);				
-
-				ctx.font = 'normal 20px Arial';
-				textsize.width = Math.round(textsize.width / 10) * 10;
-				textsize.width += 10;
-				ctx.strokeRect(tool.x0, tool.y0, textsize.width, -20);
-				ctx.fillText(inputstring, tool.x0, tool.y0);
-
-				
+				ctx.clearRect(0, 31, canvas.width, canvas.height);
+				ctx.font = 'italic 20px sans-serif';
+				ctx.fillText(inputstring,ev._x,ev._y);
 			};
 
 			this.mouseup = function (ev) {
-
-//				if (tool.started) {
-//					tool.mousemove(ev);
-//					tool.started = false;
-//					img_update();
-//				}
+				if (tool.started) {
+					tool.mousemove(ev);
+					tool.started = false;
+					img_update();
+				}
 			};
 	};
 
@@ -396,14 +400,7 @@ var drawingCanvas = (function () {
 					 tool_selected = 'arrowline';
 				}
 				else if(ev._x < 120){
-					tool_selected = 'text';
-					textentered = prompt("Enter text", "");
-					ctx.font = 'normal 20px Arial';
-					ctx.fillText("Text Entered: ",150,22);
-					ctx.fillText(textentered,270,22);
-					textsize = ctx.measureText(textentered);
-					//alert(textsize);
-					img_update();
+					 tool_selected = 'text';
 				}
 				
 				if (drawingtools[tool_selected]) {
@@ -413,6 +410,7 @@ var drawingCanvas = (function () {
 
 		}
 		else{
+			
 			var func = drawingtool[ev.type];
 				if (func) {
 					func(ev);
@@ -421,27 +419,33 @@ var drawingCanvas = (function () {
 		
 	}
 	
-	function undo(){
-	   if (cStep > 0) {
-			cStep--;
-			var canvasPic = new Image();
-			canvas = cPushArray[cStep];
-			img_update();
-			//ctxo.drawImage(canvasPic, 0, 0);
-			//ctx.clearRect(0, 31, canvas.width, canvas.height);
-		}	
-	}
-	
-	function cPush() {
-		cStep++;
-		if (cStep < cPushArray.length) { cPushArray.length = cStep; }
-		cPushArray.push(canvas);
-	}
-	
 	function img_update () {
+	
+	/*
+		for (var x = 0; x < 601; x += 10) {
+			//ctx.save();
+				ctx.setLineDash([2]);
+				ctx.strokeRect(x, 30, 20, 20);
+			//ctx.restore();
+		}
+	*/
 		ctxo.drawImage(canvas, 0, 0);
 		ctx.clearRect(0, 31, canvas.width, canvas.height);
-		cPush();			
+		
+/* Lines not working ???		
+		for (var x = 0.5; x < 601; x += 10) {
+			ctx.beginPath();
+			ctx.moveTo(x, 0);
+			ctx.lineTo(x, 381);
+			ctx.closePath();
+		}
+
+		for (var y = 30.5; y < 301; y += 10) {
+			ctx.moveTo(30, y);
+			ctx.lineTo(500, y);
+		}
+*/		
+		
 	}
 
 	function drawCanvas()
@@ -458,7 +462,6 @@ var drawingCanvas = (function () {
 					ctxo.moveTo(x,31);
 					ctxo.lineTo(x,300);
 					ctxo.stroke();
-					ctxo.restore();
 				}
 
 				for (var y = 31.5; y < 301; y += 10) {
@@ -468,9 +471,11 @@ var drawingCanvas = (function () {
 					ctxo.moveTo(0,y);
 					ctxo.lineTo(600,y);
 					ctxo.stroke();
-					ctxo.restore();
 				}
-		
+
+				//ctxo.strokeRect(x, 30, 20, 20);
+			//ctx.restore();
+				
 				
 				var rectImage = new Image();   // a
 				var lineImage = new Image();   // b 
@@ -538,6 +543,8 @@ var drawingCanvas = (function () {
 			canvas.addEventListener("mouseout", mouseEvent, false);
 
 	}
+
+
 
 	
 	return {
