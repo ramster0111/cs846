@@ -628,6 +628,8 @@ var drawingCanvas = (function () {
 
 				ctx = canvas.getContext('2d');		
 				ctx.strokeStyle = '#000000';
+				// "rgba(255, 255, 255, 0.5)"
+				//ctx.strokeStyle = "rgba(0, 0, 0, 0)";
 				// Load images
 				rectImage.src = "images/rect.png";
 				rectImage.onload = function() {
