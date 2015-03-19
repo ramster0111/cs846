@@ -130,7 +130,6 @@ var drawingCanvas = (function () {
 					var l2 = tool.isOnLine(arrowlines[j].x1, arrowlines[j].y1, arrowlines[j].x2, arrowlines[j].y2, tool.x0, tool.y0);
 					if( l1 || l2){
 						var index = arrowlines.indexOf(arrowlines[j]);
-						//alert(arrowlines[j]);
 						arrowlines.splice(index, 1);
 						ctx.clearRect(0, 31, canvas.width, canvas.height);
 						return;
@@ -142,7 +141,6 @@ var drawingCanvas = (function () {
 					var l2 = tool.isOnLine(strings[j].x, strings[j].y - 10, strings[j].x + strings[j].text.length * 10, strings[j].y - 10, tool.x0, tool.y0);
 					if( l1 || l2){
 						var index = arrowlines.indexOf(strings[j]);
-						//alert(arrowlines[j]);
 						strings.splice(index, 1);
 						ctx.clearRect(0, 31, canvas.width, canvas.height);
 						return;
@@ -444,7 +442,10 @@ var drawingCanvas = (function () {
 				ctx.clearRect(0, 31, canvas.width, canvas.height);				
 				ctx.font = 'normal 12px Arial';
 				for( i = 0; i< inputstring.length; i++){
-					ctx.fillText(inputstring[i], tool.x0 + i * 10, tool.y0);
+					if(inputstring[i] == 'i')
+						ctx.fillText(inputstring[i], tool.x0 + i * 10 + 5, tool.y0);
+					else
+						ctx.fillText(inputstring[i], tool.x0 + i * 10, tool.y0);
 				}
 				img_update();
 			};
@@ -594,7 +595,10 @@ var drawingCanvas = (function () {
 		ctx.font = 'normal 12px Arial';
 		for(j in strings){
 			for( i = 0; i< strings[j].text.length; i++){
-				ctx.fillText(strings[j].text[i], strings[j].x + i * 10, strings[j].y);
+				if(strings[j].text[i] == 'i')
+					ctx.fillText(strings[j].text[i], strings[j].x + i * 10 + 5, strings[j].y);
+				else
+					ctx.fillText(strings[j].text[i], strings[j].x + i * 10, strings[j].y);
 			}
 		}
 		
