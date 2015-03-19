@@ -33,6 +33,9 @@ function handleMouseDown(evt) {
 		rectangles = [],
 		lines = [],
 		arrowlines = [],
+		strings = [],
+		textentered,
+		textsize,
 		ctxo;
 
 function InsertDiagram(e) 
@@ -396,31 +399,45 @@ var drawingCanvas = (function () {
 	drawingtools.text = function () {
 			var tool = this;
 			this.started = false;
-			var inputstring = "Raminder",
+			var inputstring = "",
 				textwidth = 20,
 				textheight = 20;
 				
 			this.mousedown = function (ev) {
-				if (!tool.started) {
-					return;
-				}				
-				tool.x0 = ev._x;
-				tool.y0 = ev._y;
+					if (tool.started) {
+						tool.started = false;
+						if(textentered != ""){
+							var storestringobject = {};
+							storestringobject.text = textentered;
+							storestringobject.x = tool.x0;
+							storestringobject.y = tool.y0;
+							strings.push(storestringobject);
+							textentered = "";
+						}
+					}
+					img_update();
 			};
 
 			this.mousemove = function (ev) {
+				if (ev._y < 31 || ev._y > 300) {
+					return;
+				}				
+				inputstring = textentered;
 				tool.started = true;
-				ctx.clearRect(0, 31, canvas.width, canvas.height);
-				ctx.font = 'italic 20px sans-serif';
-				ctx.fillText(inputstring,ev._x,ev._y);
+				tool.x0 = ev._x;
+				tool.y0 = ev._y;
+				tool.x0 = Math.round(tool.x0 / 10) * 10;
+				tool.y0 = Math.round(tool.y0 / 10) * 10;				
+				ctx.clearRect(0, 31, canvas.width, canvas.height);				
+				ctx.font = 'normal 12px Arial';
+				for( i = 0; i< inputstring.length; i++){
+					ctx.fillText(inputstring[i], tool.x0 + i * 10, tool.y0);
+				}
+				img_update();
 			};
 
 			this.mouseup = function (ev) {
-				if (tool.started) {
-					tool.mousemove(ev);
-					tool.started = false;
-					img_update();
-				}
+				img_update();
 			};
 	};
 
@@ -431,6 +448,7 @@ var drawingCanvas = (function () {
 			ev._x = ev.layerX;
 			ev._y = ev.layerY;
 		} 
+		
 		var func = drawingtool[ev.type];
 			if (func) {
 				func(ev);
@@ -456,7 +474,13 @@ var drawingCanvas = (function () {
 					 tool_selected = 'arrowline';
 				}
 				else if(ev._x < 120){
-					 tool_selected = 'text';
+					tool_selected = 'text';
+					textentered = prompt("Enter text", "");
+					//ctx.font = 'normal 20px Arial';
+					//ctx.fillText("Text Entered: ",150,22);
+					//ctx.fillText(textentered,270,22);
+					textsize = textentered.length;
+					img_update();
 				}
 				else if(ev._x < 150){
 					 tool_selected = 'erase';
@@ -467,8 +491,7 @@ var drawingCanvas = (function () {
 				}
 
 		}
-		else{
-			
+		else{		
 			var func = drawingtool[ev.type];
 				if (func) {
 					func(ev);
@@ -545,6 +568,21 @@ var drawingCanvas = (function () {
 					ctx.closePath();
 					ctx.restore();
 					ctx.fill();				
+		}
+		
+		ctx.clearRect(150, 0, 400 , 30);
+		
+		if(textentered){
+			ctx.font = 'normal 12px Arial';
+			ctx.fillText("Text Entered: ",150,22);
+			ctx.fillText(textentered,270,22);
+		}
+		
+		ctx.font = 'normal 12px Arial';
+		for(j in strings){
+			for( i = 0; i< strings[j].text.length; i++){
+				ctx.fillText(strings[j].text[i], strings[j].x + i * 10, strings[j].y);
+			}
 		}
 		
 	}
