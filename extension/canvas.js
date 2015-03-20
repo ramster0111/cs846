@@ -286,9 +286,18 @@ var drawingCanvas = (function () {
 					ctx.stroke();
 					ctx.closePath();
 					
-					var endRadians = Math.atan((ev._y - tool.y0)/(ev._x - ev._x));
-					endRadians += ((ev._x >= ev._x) ? 90 : -90 ) * Math.PI / 180;
-
+					var endRadians;
+					
+					if (tool.y0 == ev._y)
+					{
+						endRadians = Math.atan((ev._y - tool.y0)/(ev._x - tool.x0));
+						endRadians += ((ev._x >= tool.x0) ? 90 : -90 ) * Math.PI / 180;					
+					}
+					else
+					{				
+						endRadians = Math.atan((ev._y - tool.y0)/(ev._x - ev._x));
+						endRadians += ((ev._x >= ev._x) ? 90 : -90 ) * Math.PI / 180;
+					}
 					ctx.save();
 					ctx.beginPath();
 					ctx.translate(ev._x,ev._y);
@@ -313,9 +322,19 @@ var drawingCanvas = (function () {
 					ctx.lineTo(ev._x,ev._y);
 					ctx.stroke();
 					ctx.closePath();
-
-					var endRadians = Math.atan((ev._y - ev._y)/(ev._x - tool.x0));
-					endRadians += ((ev._x >= tool.x0) ? 90 : -90 ) * Math.PI / 180;
+					var endRadians;
+					
+					if (tool.x0 == ev._x)
+					{
+						endRadians = Math.atan((ev._y - tool.y0)/(ev._x - tool.x0));
+						endRadians += ((ev._x >= tool.x0) ? 90 : -90 ) * Math.PI / 180;					
+					}
+					else
+					{				
+						endRadians = Math.atan((ev._y - ev._y)/(ev._x - tool.x0));
+						endRadians += ((ev._x >= tool.x0) ? 90 : -90 ) * Math.PI / 180;
+					}
+					
 
 					ctx.save();
 					ctx.beginPath();
@@ -573,9 +592,23 @@ var drawingCanvas = (function () {
 					ctx.stroke();
 					ctx.closePath();
 					
-					var endRadians = Math.atan((arrowlines[j].y2- arrowlines[j].y1)/(arrowlines[j].x2 - arrowlines[j].x1));
-					endRadians += ((arrowlines[j].x2 >= arrowlines[j].x1) ? 90 : -90 ) * Math.PI / 180;
-
+					var endRadians;
+					
+					if (arrowlines[j].y0 == arrowlines[j].y2)
+					{
+						endRadians = Math.atan((arrowlines[j].y2- arrowlines[j].y0)/(arrowlines[j].x2 - arrowlines[j].x0));
+						endRadians += ((arrowlines[j].x2 >= arrowlines[j].x0) ? 90 : -90 ) * Math.PI / 180;					
+					}
+					else if(arrowlines[j].x0 == arrowlines[j].x2)
+					{				
+						endRadians = Math.atan((arrowlines[j].y2- arrowlines[j].y0)/(arrowlines[j].x2 - arrowlines[j].x0));
+						endRadians += ((arrowlines[j].x2 >= arrowlines[j].x0) ? 90 : -90 ) * Math.PI / 180;
+					}
+					else{
+						endRadians = Math.atan((arrowlines[j].y2- arrowlines[j].y1)/(arrowlines[j].x2 - arrowlines[j].x1));
+						endRadians += ((arrowlines[j].x2 >= arrowlines[j].x1) ? 90 : -90 ) * Math.PI / 180;
+					}
+					
 					ctx.save();
 					ctx.beginPath();
 					ctx.translate(arrowlines[j].x2, arrowlines[j].y2);
