@@ -296,7 +296,7 @@ function AddIntersections(stringArray, arrayMap, x, y)
 }
 
 // not done yet
-function ParseVectorToUnicode(dataInput)
+function ParseVectorToUnicode(dataInput, yBorder)
 {
 	var rectangles 	= dataInput.rectangles;
 	var lines 		= dataInput.lines;
@@ -327,6 +327,7 @@ function ParseVectorToUnicode(dataInput)
 		for(b = 0; b < textWidth; b++)
 		{
 			lineStr += " ";
+			//lineStr += '\u0020';
 		}
 		stringArray.push(lineStr);
 	}
@@ -335,6 +336,8 @@ function ParseVectorToUnicode(dataInput)
 	for(i = 0; i < rectangles.length; i++)
 	{		
 		var rect = rectangles[i];
+
+
 
 		// vertical
 		var x1 = rect.x / gridSize;
@@ -359,6 +362,23 @@ function ParseVectorToUnicode(dataInput)
 			arrayMap[a][y1] = 1;
 			arrayMap[a][y2] = 1;
 		}
+
+		if(yBorder.minY > y1)
+		{
+			yBorder.minY = y1;
+		}
+		if(yBorder.minY > y2)
+		{
+			yBorder.minY = y2;
+		}
+		if(yBorder.maxY < y1)
+		{
+			yBorder.maxY = y1;
+		}
+		if(yBorder.maxY < y2)
+		{
+			yBorder.maxY = y2;
+		}
 		
 		stringArray[y1] = setCharAt(stringArray[y1], x1, tlCorner);	// topleft		
 		stringArray[y1] = setCharAt(stringArray[y1], x2, trCorner);	// topright		
@@ -380,6 +400,35 @@ function ParseVectorToUnicode(dataInput)
 		DrawCorner(stringArray, arrayMap, line);
 		console.log(line.x0 + " - " + line.y0 + " | " + line.x1 + " - " + line.y1 + " | " + line.x2 + " - " + line.y2);
 
+
+		var y1 = line.y0 / gridSize;
+		var y2 = line.y1  / gridSize;
+		var y3 = line.y2 / gridSize;
+		if(yBorder.minY > y1)
+		{
+			yBorder.minY = y1;
+		}
+		if(yBorder.minY > y2)
+		{
+			yBorder.minY = y2;
+		}
+		if(yBorder.minY > y3)
+		{
+			yBorder.minY = y3;
+		}
+		if(yBorder.maxY < y1)
+		{
+			yBorder.maxY = y1;
+		}
+		if(yBorder.maxY < y2)
+		{
+			yBorder.maxY = y2;
+		}
+		if(yBorder.maxY < y3)
+		{
+			yBorder.maxY = y3;
+		}
+
 	}
 	
 	// parse arrow lines
@@ -392,6 +441,34 @@ function ParseVectorToUnicode(dataInput)
 		DrawArrow(stringArray, arrayMap, aline);
 		DrawCorner(stringArray, arrayMap, aline);
 		console.log(aline.x0 + " - " + aline.y0 + " | " + aline.x1 + " - " + aline.y1 + " | " + aline.x2 + " - " + aline.y2);
+
+		var y1 = aline.y0 / gridSize;
+		var y2 = aline.y1  / gridSize;
+		var y3 = aline.y2 / gridSize;
+		if(yBorder.minY > y1)
+		{
+			yBorder.minY = y1;
+		}
+		if(yBorder.minY > y2)
+		{
+			yBorder.minY = y2;
+		}
+		if(yBorder.minY > y3)
+		{
+			yBorder.minY = y3;
+		}
+		if(yBorder.maxY < y1)
+		{
+			yBorder.maxY = y1;
+		}
+		if(yBorder.maxY < y2)
+		{
+			yBorder.maxY = y2;
+		}
+		if(yBorder.maxY < y3)
+		{
+			yBorder.maxY = y3;
+		}
 	}
 
 
@@ -410,6 +487,15 @@ function ParseVectorToUnicode(dataInput)
 		{
 			//stringTest += aString[j] + " - ";
 			stringArray[ySPos] = setCharAt(stringArray[ySPos], xSPos + j, aString[j] );
+
+			if(yBorder.minY > ySPos)
+			{
+				yBorder.minY = ySPos;
+			}
+			if(yBorder.maxY < ySPos)
+			{
+				yBorder.maxY = ySPos;
+			}
 		}
 		//stringTest += "\n";
 	}

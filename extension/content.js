@@ -79,18 +79,29 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse)
 {
     if(msg.text && (msg.text == "insert_text")) 
     {
-        var stringArray = ParseVectorToUnicode(msg.data);
+        var yBorder = {};
+        yBorder.minY = 10000;
+        yBorder.maxY = -10000;
+
+
+
+        var stringArray = ParseVectorToUnicode(msg.data, yBorder);
+
+        //alert(yBorder.minY + " - " + yBorder.maxY);
+
         InsertANewline();
         InsertToAceEditor("/*");
         console.log(stringArray.length);
         for(a = 0; a < stringArray.length; a++)
         {
-            if(a < 3)
+            //if(a < 3)
+            if(a >= yBorder.minY && a <= yBorder.maxY)
             {
-                continue;
+                //continue;
+            //}
+                InsertANewline();
+                InsertToAceEditor( "* " + stringArray[a]);
             }
-           InsertANewline();
-           InsertToAceEditor( "* " + stringArray[a]);
         }
         InsertANewline();
         InsertToAceEditor("*/");
