@@ -14,12 +14,13 @@ script0.href = "https://fonts.googleapis.com/css?family=Droid+Sans+Mono"
 document.head.appendChild(script0);
 */
 
-
+/*
 var scriptContent1 = "document.querySelector('.ace_editor').env.editor.setOptions({ fontFamily: 'Droid Sans Mono', fontSize: '10pt' });";
 var script1 = document.createElement('script');
 script1.id = 'tmpScriptInit';
 script1.appendChild(document.createTextNode(scriptContent1));
 document.body.appendChild(script1);
+*/
 
 function mouseDown(e)
 {
