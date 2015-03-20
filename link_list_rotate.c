@@ -1,7 +1,38 @@
 
 /* 
   Function to rotate a link list by k elements in clockwise direction.
+  Eg: for 2 elements:
   
+  /* 
+  *                                                               
+  *                                                               
+  *                                                               
+  *                                                               
+  *      ┏━━┓    ┏━━┓    ┏━━┓       ┏━━┓                          
+  *      ┃  ┣━━━━▶  ┣━━━━▶  ┣━ ━ ━  ┃  ┃                          
+  *      ┃1 ┃    ┃2 ┃    ┃3 ┃       ┃N ┃                          
+  *      ┗━━┛    ┗━━┛    ┗━━┛       ┗━━┛                          
+  *                                                               
+  *                                                               
+  *                                                               
+  *                                                               
+  *                                                               
+  *                                                               
+  *                                                               
+  *      ┏━━┓    ┏━━┓    ┏━━┓       ┏━━┓                          
+  *      ┃  ┣━━━━▶  ┣━━━━▶  ┣━━ ━━  ┃  ┃                          
+  *      N-1┃    ┃N ┃    ┃1 ┃       N-2┃                          
+  *      ┗━━┛    ┗━━┛    ┗━━┛       ┗━━┛                          
+  *                                                               
+  *                                                               
+  *                                                               
+  *                                                               
+  *                                                               
+  *                                                               
+  *                                                               
+  *                                                               
+  *                                                               
+  */ 
 */
 
 struct list *rotate_k(struct list *node,int k)
