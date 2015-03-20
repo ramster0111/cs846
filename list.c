@@ -1,3 +1,7 @@
+
+// DRAW A DIAGRAM FOr THIS SOURCE CODE
+
+// http://www.macs.hw.ac.uk/~rjp/Coursewww/Cwww/linklist.html
 #include<stdlib.h>
 #include<stdio.h>
 
