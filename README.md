@@ -1,1 +1,1 @@
-Adding diagrams to source code
+Drawing diagrams on source code

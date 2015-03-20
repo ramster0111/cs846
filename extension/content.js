@@ -19,7 +19,8 @@ var scriptContent1 = "document.querySelector('.ace_editor').env.editor.setOption
 var script1 = document.createElement('script');
 script1.id = 'tmpScriptInit';
 script1.appendChild(document.createTextNode(scriptContent1));
-document.body.appendChild(script1);*/
+document.body.appendChild(script1);
+*/
 
 function mouseDown(e)
 {

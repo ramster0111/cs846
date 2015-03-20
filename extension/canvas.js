@@ -144,7 +144,7 @@ var drawingCanvas = (function () {
 					var l1 = tool.isOnLine(strings[j].x, strings[j].y, strings[j].x + strings[j].text.length * 10, strings[j].y, tool.x0, tool.y0);
 					var l2 = tool.isOnLine(strings[j].x, strings[j].y - 10, strings[j].x + strings[j].text.length * 10, strings[j].y - 10, tool.x0, tool.y0);
 					if( l1 || l2){
-						var index = arrowlines.indexOf(strings[j]);
+						var index = strings.indexOf(strings[j]);
 						strings.splice(index, 1);
 						ctx.clearRect(0, 31, canvas.width, canvas.height);
 						return;
@@ -156,7 +156,7 @@ var drawingCanvas = (function () {
 
 			this.mousemove = function (ev) {
 				tool.started = true;
-				img_update();
+				//img_update();
 				return;
 			};
 
