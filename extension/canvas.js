@@ -45,7 +45,11 @@ function InsertDiagram(e)
 	transferData.rectangles = rectangles;
 	transferData.lines = lines;
 	transferData.arrowlines = arrowlines;
+	transferData.strings = strings;
 
+	//alert(strings.length);
+
+	//alert("insert diagram");
 	// send data
     chrome.runtime.sendMessage({directive: "insertdiagram", data: transferData}, function(response)
     {

@@ -6,6 +6,8 @@ var currentTabID = -1;
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) 
 {
+    //alert(currentTabID);
+
     switch (request.directive) 
     {
     case "insertdiagram":
@@ -24,10 +26,10 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse)
 
 chrome.tabs.onUpdated.addListener(function(tabID, changeInfo, tab)
 {
-    if(tabID)
-    {
+    //if(tabID)
+    //{
         currentTabID = tabID;
-    }
+    //}
 
     var splitString = tab.url.split( '/' );
 	if(tab.url.match(/https:\/\/(gist.)?github.com/) && splitString.length >= 5 && splitString[5].match("edit"))

@@ -301,6 +301,7 @@ function ParseVectorToUnicode(dataInput)
 	var rectangles 	= dataInput.rectangles;
 	var lines 		= dataInput.lines;
 	var arrowlines 	= dataInput.arrowlines;
+	var strings		= dataInput.strings;
 
 	var textWidth = oriWidth / gridSize;
 	var textHeight = oriHeight / gridSize;
@@ -392,6 +393,27 @@ function ParseVectorToUnicode(dataInput)
 		DrawCorner(stringArray, arrayMap, aline);
 		console.log(aline.x0 + " - " + aline.y0 + " | " + aline.x1 + " - " + aline.y1 + " | " + aline.x2 + " - " + aline.y2);
 	}
+
+
+	// parse texts
+	//var stringTest = "";
+	//alert(strings.length);
+	for(i = 0; i < strings.length; i++)
+	{
+		var aString = strings[i].text;
+		var xSPos = strings[i].x / gridSize;
+		var ySPos = strings[i].y / gridSize;
+
+		//stringTest += xSPos + " --- " + ySPos + " - ";
+
+		for(j = 0; j < aString.length; j++)
+		{
+			//stringTest += aString[j] + " - ";
+			stringArray[ySPos] = setCharAt(stringArray[ySPos], xSPos + j, aString[j] );
+		}
+		//stringTest += "\n";
+	}
+	//alert(stringTest);
 
 
 	// STIL BUGGY
