@@ -1,6 +1,22 @@
 
 // DRAW A DIAGRAM FOr THIS SOURCE CODE
 
+/* 
+*                                ┏━━┳━━━━┓       ┏━━┳━━━━┓      
+*                                ┃  ┃    ┃       ┃  ┃    ┃      
+*                                ┃  ┃    ┃       ┃  ┃    ┃      
+*                   head ━━━━━━━━▶  ┃next┣━━━━━━━▶  ┃null┃      
+*                                ┃  ┃    ┃       ┃  ┃    ┃      
+*                                ┃  ┃    ┃       ┃  ┃    ┃      
+*                                ┗━━┛▲━━━┛       ┗━━┻━━━━┛      
+*                                    ┃                          
+*                                    ┃                          
+*                                    ┃                          
+*                                    ┃                          
+*                                                               
+*                                                               
+*                                 current                       
+*/ 
 
 // http://www.macs.hw.ac.uk/~rjp/Coursewww/Cwww/linklist.html
 #include<stdlib.h>
@@ -21,7 +37,7 @@ void main() {
 
    for(i=1;i<=10;i++) {
      curr = (item *)malloc(sizeof(item));
-      curr-
+      curr--;
      
       curr->next  = head;
       head = curr;
