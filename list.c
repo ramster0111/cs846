@@ -1,20 +1,7 @@
 
 // DRAW A DIAGRAM FOr THIS SOURCE CODE
 
-/* 
-*                      ┏━━━┳━━━━┳━━━━┳━━━━━┳━━━━┳━━━┳━━━━┓      
-*                      ┃   ┃    ┃    ┃     ┃    ┃   ┃    ┃      
-*                      ┃   ┃  ━━╋━▶  ┃    ━╋━━▶ ┃  ━╋━━▶ ┣━━━▶  
-*              INPUT:  ┃12 ┃    ┃  34┃     ┃ 45 ┃   ┃  56┃      
-*                      ┗━━━╋━━━━┻━━━━┻━━━━━┻━━━━┻━━━┻━━━━┛      
-*                          ┗                                    
-*                                                               
-*                                                               
-*                                                               
-*                                                               
-*                OUTPUT:                                        
-*                           12,23,34,45,56                      
-*/ 
+
 // http://www.macs.hw.ac.uk/~rjp/Coursewww/Cwww/linklist.html
 #include<stdlib.h>
 #include<stdio.h>
