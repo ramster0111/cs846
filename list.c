@@ -19,34 +19,9 @@ void main() {
    head = NULL;
 
    for(i=1;i<=10;i++) {
-      curr = (item *)malloc(sizeof(item));
+     curr = (item *)malloc(sizeof(item));
       curr-
-      /* 
-      *      ┏━━━━━━━━━━━━━━━┓                         ┏━━━━━━━━━┓    
-      *      ┃               ┃                         ┃         ┃    
-      *      ┃               ┃                         ┃         ┃    
-      *      ┃               ┃                         ┃         ┃    
-      *      ┃               ┃                         ┃         ┃    
-      *      ┃               ┃                         ┃         ┃    
-      *      ┃               ┃                         ┃         ┃    
-      *      ┃               ┣━━━━━━▶ empty list━━━━━━▶┃         ┃    
-      *      ┃               ┃                         ┃         ┃    
-      *      ┃               ┃                         ┃         ┃    
-      *      ┃               ┃                         ┃         ┃    
-      *      ┃               ┃                         ┃         ┃    
-      *      ┃               ┃                         ┃         ┃    
-      *      ┃               ┃                         ┃         ┃    
-      *      ┃               ┃                         ┃         ┃    
-      *      ┗━━━┳━━━━━▲━━━━━┛                         ┃         ┃    
-      *          ┃     ┃                               ┗━┳━━━━▲━━┛    
-      *          ┃     ┃                                 ┃    ┃       
-      *          ┃     ┃                                 ┃    ┃       
-      *        for every node                            ┃    ┃       
-      *          ┃     ┃                             for every node   
-      *        allocate memory                           ┃    ┃       
-      *          ┗━━━━━                               assign value   i 
-      *                                                  ┗━━━━        
-      */ 
+     
       curr->next  = head;
       head = curr;
    }
