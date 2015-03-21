@@ -1,22 +1,7 @@
 
 // DRAW A DIAGRAM FOr THIS SOURCE CODE
 
-/* 
-*                                ┏━━┳━━━━┓       ┏━━┳━━━━┓      
-*                                ┃  ┃    ┃       ┃  ┃    ┃      
-*                                ┃  ┃    ┃       ┃  ┃    ┃      
-*                   head ━━━━━━━━▶  ┃next┣━━━━━━━▶  ┃null┃      
-*                                ┃  ┃    ┃       ┃  ┃    ┃      
-*                                ┃  ┃    ┃       ┃  ┃    ┃      
-*                                ┗━━┛▲━━━┛       ┗━━┻━━━━┛      
-*                                    ┃                          
-*                                    ┃                          
-*                                    ┃                          
-*                                    ┃                          
-*                                                               
-*                                                               
-*                                 current                       
-*/ 
+
 
 // http://www.macs.hw.ac.uk/~rjp/Coursewww/Cwww/linklist.html
 #include<stdlib.h>
