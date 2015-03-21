@@ -87,6 +87,8 @@ var drawingCanvas = (function () {
 				if( endx - initial_x == 0){
 					if ( pointy > initial_y && pointy <  endy && pointx == initial_x)
 						return true;
+					if ( pointy < initial_y && pointy >  endy && pointx == initial_x)
+						return true;
 				}
 				
 				if((y <= pointy+.2 && y >= pointy-.2) && (pointx >= initial_x && pointx <= endx)) {
@@ -118,8 +120,18 @@ var drawingCanvas = (function () {
 				}
 				
 				for (var j in lines) {
-					var l1 = tool.isOnLine(lines[j].x0, lines[j].y0, lines[j].x1, lines[j].y1, tool.x0, tool.y0);
-					var l2 = tool.isOnLine(lines[j].x1, lines[j].y1, lines[j].x2, lines[j].y2, tool.x0, tool.y0);
+					var l1;
+					var l2;
+					
+					if (lines[j].x0 < lines[j].x2){
+						l1 = tool.isOnLine(lines[j].x0, lines[j].y0, lines[j].x1, lines[j].y1, tool.x0, tool.y0);
+						l2 = tool.isOnLine(lines[j].x1, lines[j].y1, lines[j].x2, lines[j].y2, tool.x0, tool.y0);
+					}
+					else{
+						l1 = tool.isOnLine(lines[j].x2, lines[j].y2, lines[j].x1, lines[j].y1, tool.x0, tool.y0);
+						l2 = tool.isOnLine(lines[j].x1, lines[j].y1, lines[j].x0, lines[j].y0, tool.x0, tool.y0);						
+					}
+					
 					if( l1 || l2){
 						var index = lines.indexOf(lines[j]);
 						lines.splice(index, 1);
@@ -130,8 +142,18 @@ var drawingCanvas = (function () {
 				}
 
 				for (var j in arrowlines) {
-					var l1 = tool.isOnLine(arrowlines[j].x0, arrowlines[j].y0, arrowlines[j].x1, arrowlines[j].y1, tool.x0, tool.y0);
-					var l2 = tool.isOnLine(arrowlines[j].x1, arrowlines[j].y1, arrowlines[j].x2, arrowlines[j].y2, tool.x0, tool.y0);
+					var l1;
+					var l2;
+					
+					if (arrowlines[j].x0 < arrowlines[j].x2){
+						l1 = tool.isOnLine(arrowlines[j].x0, arrowlines[j].y0, arrowlines[j].x1, arrowlines[j].y1, tool.x0, tool.y0);
+						l2 = tool.isOnLine(arrowlines[j].x1, arrowlines[j].y1, arrowlines[j].x2, arrowlines[j].y2, tool.x0, tool.y0);
+					}
+					else{
+						l1 = tool.isOnLine(arrowlines[j].x2, arrowlines[j].y2, arrowlines[j].x1, arrowlines[j].y1, tool.x0, tool.y0);
+						l2 = tool.isOnLine(arrowlines[j].x1, arrowlines[j].y1, arrowlines[j].x0, arrowlines[j].y0, tool.x0, tool.y0);						
+					}
+					
 					if( l1 || l2){
 						var index = arrowlines.indexOf(arrowlines[j]);
 						arrowlines.splice(index, 1);
