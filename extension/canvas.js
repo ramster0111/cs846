@@ -87,6 +87,8 @@ var drawingCanvas = (function () {
 				if( endx - initial_x == 0){
 					if ( pointy > initial_y && pointy <  endy && pointx == initial_x)
 						return true;
+					if ( pointy < initial_y && pointy >  endy && pointx == initial_x)
+						return true;
 				}
 				
 				if((y <= pointy+.2 && y >= pointy-.2) && (pointx >= initial_x && pointx <= endx)) {
