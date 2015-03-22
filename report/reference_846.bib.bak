@@ -19,6 +19,26 @@
   Url                      = {http://dl.acm.org/citation.cfm?id=2486788.2486882}
 }
 
+@InProceedings{Bragdon2010,
+  Title                    = {Code Bubbles: A Working Set-based Interface for Code Understanding and Maintenance},
+  Author                   = {Bragdon, Andrew and Zeleznik, Robert and Reiss, Steven P. and Karumuri, Suman and Cheung, William and Kaplan, Joshua and Coleman, Christopher and Adeputra, Ferdi and LaViola,Jr., Joseph J.},
+  Booktitle                = {Proceedings of the SIGCHI Conference on Human Factors in Computing Systems},
+  Year                     = {2010},
+
+  Address                  = {New York, NY, USA},
+  Pages                    = {2503--2512},
+  Publisher                = {ACM},
+  Series                   = {CHI '10},
+
+  Acmid                    = {1753706},
+  Doi                      = {10.1145/1753326.1753706},
+  ISBN                     = {978-1-60558-929-9},
+  Keywords                 = {bubbles, java, multi-view, simultaneous views, source code},
+  Location                 = {Atlanta, Georgia, USA},
+  Numpages                 = {10},
+  Url                      = {http://doi.acm.org/10.1145/1753326.1753706}
+}
+
 @InProceedings{Chen2011,
   Title                    = {Nonlinear Revision Control for Images},
   Author                   = {Chen, Hsiang-Ting and Wei, Li-Yi and Chang, Chun-Fa},
@@ -95,6 +115,15 @@
   Url                      = {http://doi.acm.org/10.1145/2047196.2047215}
 }
 
+@Article{Knuth84literateprogramming,
+  Title                    = {Literate programming},
+  Author                   = {Donald E. Knuth},
+  Journal                  = {The Computer Journal},
+  Year                     = {1984},
+  Pages                    = {97--111},
+  Volume                   = {27}
+}
+
 @InProceedings{Simpson2011,
   Title                    = {Embedding Interface Sketches in Code},
   Author                   = {Simpson, James and Terry, Michael},
@@ -110,6 +139,19 @@
   ISBN                     = {978-1-4503-1014-7},
   Location                 = {Santa Barbara, California, USA},
   Url                      = {http://doi.acm.org/10.1145/2046396.2046438}
+}
+
+@InProceedings{Twidale2005,
+  Title                    = {Exploring Usability Discussions in Open Source Development},
+  Author                   = {Twidale, M.B. and Nichols, D.M.},
+  Booktitle                = {System Sciences, 2005. HICSS '05. Proceedings of the 38th Annual Hawaii International Conference on},
+  Year                     = {2005},
+  Month                    = {Jan},
+  Pages                    = {198c-198c},
+
+  Doi                      = {10.1109/HICSS.2005.266},
+  ISSN                     = {1530-1605},
+  Keywords                 = {Computer bugs;Computer science;Databases;Graphical user interfaces;Information science;Open source software;Robustness;Software libraries;Usability;User interfaces}
 }
 
 @InProceedings{Yatani2009,

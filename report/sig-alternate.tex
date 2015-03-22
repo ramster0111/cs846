@@ -49,6 +49,9 @@
 
 \pagenumbering{arabic}
 
+\usepackage{array}
+\usepackage{enumitem}
+
 \begin{document}
 %
 % --- Author Metadata here ---
@@ -57,9 +60,7 @@
 %\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
 % --- End of Author Metadata ---
 
-\title{Drawing Diagrams in Source Code
-\titlenote{(Produces the permission block, and copyright information). 
-For use with SIG-ALTERNATE.CLS. Supported by ACM.}} 
+\title{CodeSketch: Drawing Diagrams in Source Code} 
 
 \numberofauthors{2}
 
@@ -78,7 +79,10 @@ Raminder Sodhi\\
 
 \maketitle
 \begin{abstract}
-An image tells a thousand words. Developers often use diagrams to explain their source code. Unfortunately, diagrams, which usually are drawn on papers or whiteboards, are transitory. However, we believe that embedding diagrams in source code can be used for improving code documentation. In this paper, we propose a tool for Github to embed diagrams in source code files as Unicode Art.
+\label{abstract}
+
+A picture is worth a thousand words. Similarly, software developers also sketch diagrams for various purposes.  The diagrams they draw can be flowcharts, architecture diagrams, or algorithm descriptions. We develop a tool called CodeSketch based on several criteria of what make good diagramming tool in Open Source Software (OSS) development. Using CodeSketch, a developer can draw a diagram consists of rectangles, lines, arrows, and texts. The tool then converts the diagram to ASCII art which is directly embedded in source code. Compared to other diagram representation, diagrams created using CodeSketch can coexist with source code files, they do not require specific graphics viewer tool other than a text editor, and they are easy to be stored in a revision control system. Finally, we conduct a user study where participants can use our tool, then we collect their feedback.
+
 \end{abstract}
 
 %% A category with the (minimum) three required fields
@@ -88,26 +92,117 @@ An image tells a thousand words. Developers often use diagrams to explain their 
 %
 %\terms{Theory}
 
-\keywords{Diaggramming, visual representation}
+\keywords{Source code comments, documentation, diagrams, ASCII art}
 
 \section{Introduction}
-Diagrams and Images are useful to explain algorithms or complex source code. Developers often draw simple diagrams as source code comments using ASCII characters directly in their text editors. However, drawing ASCII art is tedious and the result is simple. We propose a web-based tool that consist of a single canvas where programmers can draw a diagram then automatically converted to a source code comment as Unicode art.
+\label{introduction}
+Diagrams are important visual representation which are widely used in design arts, engineering, and science. The use of diagrams and images is also pervasive in software development since diagrams are viewed as alternatives to verbal communication. Furthermore, diagrams enables developers to visualize concepts and communicate ideas. For example, a developer would sketch informal diagrams on scrap papers or whiteboards, then have a discussion with their coworkers. In more formal purposes, diagrams can be created using a specific designer tool. However, the designer tool restricts the developer to use a particular framework so the created diagrams cannot be exported easily to other platforms with different development tools.
 
-\section{Diagramming Practice in OSS}
-Why do developers draw diagrams?
+In co-located software development, diagrams are used during discussions, meetings, or presentations. However, these diagrams have transitory nature \cite{Cherubini2007}. One reason is that because they only serve a purpose to explain concepts to coworkers. After the coworkers understood, sketches on whiteboard will be erased and diagrams on scrap papers would be thrown into garbage bins. Although these diagrams can be converted digitally for long term purposes, such as documentation, redrawing these diagrams is tedious. 
 
+In Open Source Software (OSS) development, a practice of drawing diagrams using ASCII art has been reported. They avoid creating a lot of bitmap-based diagrams on documentation or wiki pages because they do not bother to keep these diagrams be updated when they changed their source code \cite{Yatani2009}. Nevertheless, if they must draw diagrams to communicate their ideas, they tend to use ASCII art. Although ASCII art is a simple form of diagrams, it has a practical benefit compared to other graphical representations. ASCII art enables developers not to depend on a specific designer tool. Indeed, in an open source project every developer may not use the same tools. Based on the observation, a tool-independent diagram representation is required. Therefore, our project focuses on OSS settings and the use of ASCII art. 
 
-\section{Diagramming Tool}
+In this project, we developed a diagramming tool to create ASCII art based on criteria we have collected during literature study. The created diagrams can be edited easily and viewed without a specific tools. We did a user study conducted on <X> participants. The user study consists of several tasks on which participant can try to use our tool, then followed with questionnaire. As a final step, we gather several interesting feedback.
 
-\section{User Study}
 
 \section{Related Work}
-\cite{Yatani2009} and \cite{Eunyoung2010} is related to drawing diagram in OSS.
+\label{related_work}
+Our proposed idea is related to why developers draw diagrams and creating diagrams as source code comments.
+
+\textbf{Why developers draw diagrams}. In co-located teams, diagrams help developers to understand source code, starting discussions, improve documentations and they can be used as presentation aids during a meeting \cite{Cherubini2007}.  In OSS community, developers agree that diagramming is useful but they do not like to redraw diagrams after they updated their source code  \cite{Yatani2009, Eunyoung2010}. If they must draw diagrams, they tend to use ASCII art since they have low cost in creation. Moreover, they prefer to put diagrams inside a revision control system, so everyone can keep track changes. In another study, the use of ASCII art in bug reports also has been investigated \cite{Twidale2005}.
+
+\textbf{Creating diagrams as source code comments}. GUIIO is a tool to create a GUI mockup embedded in source code \cite{Simpson2011}. Similar to our tool, they also use ASCII art. The mockup is used as an explanation to source code snippets which actually implement the actual GUI. They argue that the approach can reduce window switching between source code and designer tool. However, GUIIO cannot be used to draw more general diagrams, e.g, flowcharts.
+
+\section{System Design}
+\label{system_design}
+We summarize nine criteria of an ideal diagramming tool based on literature study of previous research on diagramming practice in OSS development  \cite{Yatani2009, Eunyoung2010}. 
+Subsequently, table \ref{codesketch_criteria_supportability} shows the supportability of CodeSketch to these criteria. Note that CodeSketch does not satisfies all criteria.
+
+
+\begin{enumerate} [nolistsep]
+\item Diagrams coexist with existing communication tools. 
+\item The diagramming tool is widely available and free. 
+\item Diagrams can be published based on who the intended audience is. 
+\item The diagramming tool can be Integrated into development infrastructure.
+\item Diagrams are easily to be stored in revision control system. 
+\item The "source code" of diagrams can be shared. 
+\item Diagrams are  not tedious to create and edit. 
+\item Diagrams do not require specific tools to create and display. 
+\item Diagrams support diff tool.
+\end{enumerate}
+
+
+
+\begin{table}[h]
+\small
+\begin{tabular}{|p{55px}|p{170px}|}
+\hline
+\textbf{Criteria - Supportability} & \textbf{Explanation} \\ \hline
+
+1 - Yes & 
+Diagrams created using CodeSketch can be easily embedded into various communication tools such as mailing list, IRC, bug report tools, code review tools, etc. 
+\\ \hline
+
+2 - Yes & 
+CodeSketch is a free web-based app. 
+\\ \hline
+
+3 - No & 
+CodeSketch is represented using unicode characters. It can be used for explaining source code to coworkers, but unsuitable for a presentation in a formal meeting, e.g. with stakeholders or end users. 
+\\ \hline
+
+4 - Yes & 
+It is a web based tool and will be embedded as source code comment, so is platform independent. 
+\\ \hline
+
+5 - Yes & 
+Unlike binary images, our diagram representation is text based so it can be stored in any revision control system  
+\\ \hline
+
+6 - Yes & 
+The diagrams themselves are also the source code. However, other diagram representations do have "source code" which can be shared, for example XML-like language for GUI. 
+\\ \hline
+
+7 - No & 
+An ambitious goal is to automate the creation of diagrams.However, our tool does not make drawing diagrams easier. 
+\\ \hline
+
+8 - Partially & 
+It requires a specific tool to create proper ASCII arts, since drawing an ASCII art manually would be difficult. Still, displaying an ASCII art does not require any specific tools other than a text editor. \\ \hline
+
+9 - Partially & 
+Diff tool can be used to compare two ASCII diagrams. Since diff tool is line based, any editing on a particular line will highing the entire line 
+\\ \hline
+
+\end{tabular}
+\caption {CodeSketch's criteria supportability}
+\label{codesketch_criteria_supportability}
+\end{table}
+
+\section{Implementation}
+\label{implementation}
+<<<Github, js, chrome extension, html5 canvas>>>
+<<< Features: draw rectangle, draw lines, draw arrow lines, text, delete >>>
+
+<<<add a screenshot of the tool, the canvas should visible and the converted diagram should also be visible>>>
+<<<a paragraph of explanation of the screenshot>>>
+
+\section{User Study}
+\label{user_study}
+<<<How do we conduct the user study>>>
+<<<Evaluation>>>
+
+
+\section{Results}
+\label{results}
+<<<How do we conduct the user study>>>
+<<<Evaluation>>>
+
 
 
 
 \section{Conclusions}
-This paper is done
+We have several future work in mind. First, we would like to know the effectiveness of using diagrams in code reviews or bug reports. In code reviews, developers have a problem in understanding source code they do not own so they cannot effectively find defects on the source code \cite{Bacchelli2013}. A similar problem is also found in bug reports where reporters do not give much explanation. Therefore, an important question is embedding diagrams would improve code understanding in code review? and would embedding diagrams in bug reports would make the bug description is more informative? Second, we feel it is necessary to develop a way for easier diagramming. Ideally, editing and updating ASCII diagrams should not be tedious, or even fully automatic. Third, we would like to know whether diagramming would be useful in collaborative settings, for example, micro-outsourcing \cite{Goldman2011}. Lastly, developing a customized diff tool to visualize how a diagram evolves over time would be an interesting research direction, similar to Nonlinear Revision Control for Images \cite{Chen2011}.
 
 %ACKNOWLEDGMENTS are optional
 
