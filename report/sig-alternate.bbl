@@ -4,8 +4,15 @@
 A.~Bacchelli and C.~Bird.
 \newblock Expectations, outcomes, and challenges of modern code review.
 \newblock In {\em Proceedings of the 2013 International Conference on Software
-  Engineering}, ICSE '13, pages 712--721, Piscataway, NJ, USA, 2013. IEEE
-  Press.
+  Engineering}, ICSE '13, Piscataway, NJ, USA, 2013. IEEE Press.
+
+\bibitem{Bettenburg2008}
+N.~Bettenburg, S.~Just, A.~Schr\"{o}ter, C.~Weiss, R.~Premraj, and
+  T.~Zimmermann.
+\newblock What makes a good bug report?
+\newblock In {\em Proceedings of the 16th ACM SIGSOFT International Symposium
+  on Foundations of Software Engineering}, SIGSOFT '08/FSE-16, New York, NY,
+  USA, 2008. ACM.
 
 \bibitem{Bragdon2010}
 A.~Bragdon, R.~Zeleznik, S.~P. Reiss, S.~Karumuri, W.~Cheung, J.~Kaplan,
@@ -13,20 +20,20 @@ A.~Bragdon, R.~Zeleznik, S.~P. Reiss, S.~Karumuri, W.~Cheung, J.~Kaplan,
 \newblock Code bubbles: A working set-based interface for code understanding
   and maintenance.
 \newblock In {\em Proceedings of the SIGCHI Conference on Human Factors in
-  Computing Systems}, CHI '10, pages 2503--2512, New York, NY, USA, 2010. ACM.
+  Computing Systems}, CHI '10, New York, NY, USA, 2010. ACM.
 
 \bibitem{Chen2011}
 H.-T. Chen, L.-Y. Wei, and C.-F. Chang.
 \newblock Nonlinear revision control for images.
-\newblock In {\em ACM SIGGRAPH 2011 Papers}, SIGGRAPH '11, pages 105:1--105:10,
-  New York, NY, USA, 2011. ACM.
+\newblock In {\em ACM SIGGRAPH 2011 Papers}, SIGGRAPH '11, New York, NY, USA,
+  2011. ACM.
 
 \bibitem{Cherubini2007}
 M.~Cherubini, G.~Venolia, R.~DeLine, and A.~J. Ko.
 \newblock Let's go to the whiteboard: How and why software developers use
   drawings.
 \newblock In {\em Proceedings of the SIGCHI Conference on Human Factors in
-  Computing Systems}, CHI '07, pages 557--566, New York, NY, USA, 2007. ACM.
+  Computing Systems}, CHI '07, New York, NY, USA, 2007. ACM.
 
 \bibitem{Eunyoung2010}
 E.~Chung, C.~Jensen, K.~Yatani, V.~Kuechler, and K.~Truong.
@@ -35,20 +42,26 @@ E.~Chung, C.~Jensen, K.~Yatani, V.~Kuechler, and K.~Truong.
   IEEE Symposium on}, Sept 2010.
 
 \bibitem{Github}
-Github.
+GitHub.
 \newblock Github, 2015.
 
 \bibitem{Goldman2011}
 M.~Goldman, G.~Little, and R.~C. Miller.
 \newblock Real-time collaborative coding in a web ide.
 \newblock In {\em Proceedings of the 24th Annual ACM Symposium on User
-  Interface Software and Technology}, UIST '11, pages 155--164, New York, NY,
-  USA, 2011. ACM.
+  Interface Software and Technology}, UIST '11, New York, NY, USA, 2011. ACM.
 
-\bibitem{Knuth84literateprogramming}
+\bibitem{Knuth1984}
 D.~E. Knuth.
 \newblock Literate programming.
-\newblock {\em The Computer Journal}, 27:97--111, 1984.
+\newblock {\em The Computer Journal}, 27, 1984.
+
+\bibitem{Parnin2010}
+C.~Parnin, C.~G\"{o}rg, and S.~Rugaber.
+\newblock Codepad: Interactive spaces for maintaining concentration in
+  programming environments.
+\newblock In {\em Proceedings of the 5th International Symposium on Software
+  Visualization}, SOFTVIS '10, New York, NY, USA, 2010. ACM.
 
 \bibitem{Simpson2011}
 J.~Simpson and M.~Terry.
@@ -61,7 +74,7 @@ J.~Simpson and M.~Terry.
 M.~Twidale and D.~Nichols.
 \newblock Exploring usability discussions in open source development.
 \newblock In {\em System Sciences, 2005. HICSS '05. Proceedings of the 38th
-  Annual Hawaii International Conference on}, pages 198c--198c, Jan 2005.
+  Annual Hawaii International Conference on}, Jan 2005.
 
 \bibitem{Yatani2009}
 K.~Yatani, E.~Chung, C.~Jensen, and K.~N. Truong.

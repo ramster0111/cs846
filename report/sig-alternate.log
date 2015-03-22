@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.3.14)  22 MAR 2015 03:58
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.3.14)  22 MAR 2015 12:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -204,35 +204,41 @@ Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \enit@inbox=\box30
 \enitdp@description=\count109
 )
-(./sig-alternate.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count110
+\float@exts=\toks38
+\float@box=\box31
+\@float@everytoks=\toks39
+\@floatcapt=\box32
+) (./sig-alternate.aux)
 \openout1 = `sig-alternate.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count110
+\scratchcounter=\count111
 \scratchdimen=\dimen126
-\scratchbox=\box31
-\nofMPsegments=\count111
-\nofMParguments=\count112
-\everyMPshowfont=\toks38
-\MPscratchCnt=\count113
+\scratchbox=\box33
+\nofMPsegments=\count112
+\nofMParguments=\count113
+\everyMPshowfont=\toks40
+\MPscratchCnt=\count114
 \MPscratchDim=\dimen127
-\MPnumerator=\count114
-\makeMPintoPDFobject=\count115
-\everyMPtoPDFconversion=\toks39
+\MPnumerator=\count115
+\makeMPintoPDFobject=\count116
+\everyMPtoPDFconversion=\toks41
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -281,22 +287,28 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for U+msa on input line 80.
+LaTeX Font Info:    Try loading font information for U+msa on input line 82.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 80.
+LaTeX Font Info:    Try loading font information for U+msb on input line 82.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 80.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 82.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-Overfull \hbox (4.43677pt too wide) in paragraph at lines 114--115
+Overfull \hbox (2.23732pt too wide) in paragraph at lines 87--88
+\T1/aer/m/n/9 other di-a-gram rep-re-sen-ta-tion, cre-ated di-a-grams us-ing Co
+deS-
+ []
+
+
+Overfull \hbox (4.43677pt too wide) in paragraph at lines 120--121
 []\T1/aer/bx/n/9 Creating di-a-grams as source code com-ments\T1/aer/m/n/9 . GU
 IIO
  []
@@ -305,46 +317,111 @@ IIO
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 140--140
-[]|\T1/aer/bx/n/8 Criteria -
+Underfull \hbox (badness 10000) in paragraph at lines 146--146
+[]|\T1/aer/bx/n/7 Criteria -
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 140--140
-\T1/aer/bx/n/8 Sup-port-a-bil-
+Underfull \hbox (badness 10000) in paragraph at lines 146--146
+\T1/aer/bx/n/7 Sup-port-a-bil-
  []
 
 
-Overfull \hbox (8.94455pt too wide) in paragraph at lines 138--178
+Overfull \hbox (8.94455pt too wide) in paragraph at lines 143--185
 [][] 
  []
 
-(./sig-alternate.bbl [2]) [3
+Package epstopdf Info: Source file: <codesketch_screenshot.eps>
+(epstopdf)                    date: 2015-03-22 05:41:22
+(epstopdf)                    size: 363097 bytes
+(epstopdf)             Output file: <codesketch_screenshot-eps-converted-to.pdf
+>
+(epstopdf)                    date: 2015-03-22 05:42:15
+(epstopdf)                    size: 239310 bytes
+(epstopdf)             Command: <repstopdf --outfile=codesketch_screenshot-eps-
+converted-to.pdf codesketch_screenshot.eps>
+(epstopdf)             \includegraphics on input line 196.
+Package epstopdf Info: Output file is already uptodate.
+<codesketch_screenshot-eps-converted-to.pdf, id=13, 1038.88126pt x 730.73pt>
+File: codesketch_screenshot-eps-converted-to.pdf Graphic file (type pdf)
 
-] (./sig-alternate.aux) ) 
+<use codesketch_screenshot-eps-converted-to.pdf>
+Package pdftex.def Info: codesketch_screenshot-eps-converted-to.pdf used on inp
+ut line 196.
+(pdftex.def)             Requested size: 238.93765pt x 168.06436pt.
+
+Overfull \hbox (8.44951pt too wide) in paragraph at lines 202--203
+\T1/aer/m/n/9 a chrome ex-ten-sions built us-ing HTML5 can-vas and Javascript.
+ []
+
+[2 <./codesketch_screenshot-eps-converted-to.pdf>]
+<drawing_task_1.png, id=26, 381.425pt x 232.87pt>
+File: drawing_task_1.png Graphic file (type png)
+ <use drawing_task_1.png>
+Package pdftex.def Info: drawing_task_1.png used on input line 225.
+(pdftex.def)             Requested size: 133.50075pt x 81.5057pt.
+
+<drawing_task_2.png, id=28, 222.8325pt x 340.27126pt>
+File: drawing_task_2.png Graphic file (type png)
+ <use drawing_task_2.png>
+Package pdftex.def Info: drawing_task_2.png used on input line 232.
+(pdftex.def)             Requested size: 77.99254pt x 119.09671pt.
+
+<drawing_task_3.png, id=29, 399.4925pt x 371.3875pt>
+File: drawing_task_3.png Graphic file (type png)
+ <use drawing_task_3.png>
+Package pdftex.def Info: drawing_task_3.png used on input line 239.
+(pdftex.def)             Requested size: 139.82446pt x 129.98756pt.
+Package epstopdf Info: Source file: <comparison_task.eps>
+(epstopdf)                    date: 2015-03-22 12:19:09
+(epstopdf)                    size: 77821 bytes
+(epstopdf)             Output file: <comparison_task-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-03-22 12:25:37
+(epstopdf)                    size: 71817 bytes
+(epstopdf)             Command: <repstopdf --outfile=comparison_task-eps-conver
+ted-to.pdf comparison_task.eps>
+(epstopdf)             \includegraphics on input line 246.
+Package epstopdf Info: Output file is already uptodate.
+
+<comparison_task-eps-converted-to.pdf, id=30, 125.46875pt x 124.465pt>
+File: comparison_task-eps-converted-to.pdf Graphic file (type pdf)
+
+<use comparison_task-eps-converted-to.pdf>
+Package pdftex.def Info: comparison_task-eps-converted-to.pdf used on input lin
+e 246.
+(pdftex.def)             Requested size: 188.20264pt x 186.69704pt.
+
+Underfull \vbox (badness 4181) has occurred while \output is active []
+
+
+(./sig-alternate.bbl [3 <./drawing_task_1.png> <./drawing_task_2.png> <./drawin
+g_task_3.png (PNG copy)> <./comparison_task-eps-converted-to.pdf>]) [4
+
+]
+(./sig-alternate.aux) ) 
 Here is how much of TeX's memory you used:
- 3138 strings out of 493304
- 40643 string characters out of 6139871
- 110575 words of memory out of 5000000
- 6510 multiletter control sequences out of 15000+600000
- 56475 words of font info for 82 fonts, out of 8000000 for 9000
+ 3233 strings out of 493304
+ 42289 string characters out of 6139871
+ 111002 words of memory out of 5000000
+ 6595 multiletter control sequences out of 15000+600000
+ 58102 words of font info for 82 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 41i,10n,28p,1137b,243s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r
-.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helv
-etic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on sig-alternate.pdf (3 pages, 149170 bytes).
+ 41i,10n,28p,932b,245s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.e
+nc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/hel
+vetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on sig-alternate.pdf (4 pages, 489613 bytes).
 PDF statistics:
- 59 PDF objects out of 1000 (max. 8388607)
- 42 compressed objects within 1 object stream
+ 85 PDF objects out of 1000 (max. 8388607)
+ 53 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

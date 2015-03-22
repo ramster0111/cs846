@@ -1,53 +1,49 @@
 This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: sig-alternate.aux
-White space in argument---line 7 of file sig-alternate.aux
- : \citation{Twidale
- :                   2005}
-I'm skipping whatever remains of this command
 The style file: abbrv.bst
 Database file #1: reference_846.bib
 Warning--entry type for "Github" isn't style-file defined
---line 91 of file reference_846.bib
-You've used 11 entries,
+--line 101 of file reference_846.bib
+You've used 13 entries,
             2118 wiz_defined-function locations,
-            576 strings with 5939 characters,
-and the built_in function-call counts, 4794 in all, are:
-= -- 498
-> -- 211
-< -- 6
-+ -- 83
-- -- 72
-* -- 312
-:= -- 735
-add.period$ -- 39
-call.type$ -- 11
-change.case$ -- 69
+            583 strings with 6391 characters,
+and the built_in function-call counts, 4227 in all, are:
+= -- 396
+> -- 262
+< -- 0
++ -- 103
+- -- 90
+* -- 283
+:= -- 749
+add.period$ -- 47
+call.type$ -- 13
+change.case$ -- 84
 chr.to.int$ -- 0
-cite$ -- 11
-duplicate$ -- 206
-empty$ -- 377
-format.name$ -- 72
-if$ -- 1072
+cite$ -- 13
+duplicate$ -- 171
+empty$ -- 330
+format.name$ -- 90
+if$ -- 885
 int.to.chr$ -- 0
-int.to.str$ -- 11
-missing$ -- 10
-newline$ -- 57
-num.names$ -- 22
-pop$ -- 81
+int.to.str$ -- 13
+missing$ -- 12
+newline$ -- 67
+num.names$ -- 26
+pop$ -- 104
 preamble$ -- 1
-purify$ -- 58
+purify$ -- 71
 quote$ -- 0
-skip$ -- 163
+skip$ -- 86
 stack$ -- 0
-substring$ -- 300
-swap$ -- 75
-text.length$ -- 6
+substring$ -- 65
+swap$ -- 15
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 44
+type$ -- 52
 warning$ -- 0
-while$ -- 41
-width$ -- 13
-write$ -- 138
-(There was 1 error message)
+while$ -- 26
+width$ -- 15
+write$ -- 158
+(There was 1 warning)

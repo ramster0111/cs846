@@ -53,7 +53,7 @@ function InsertDiagram(e)
 	// send data
     chrome.runtime.sendMessage({directive: "insertdiagram", data: transferData}, function(response)
     {
-        window.close();
+        //window.close();
     });
 }
 
@@ -62,7 +62,7 @@ function CancelDiagram(e)
 
     chrome.runtime.sendMessage({directive: "canceldiagram"}, function(response) 
     {
-        window.close();
+        //window.close();
     });
 }
 
